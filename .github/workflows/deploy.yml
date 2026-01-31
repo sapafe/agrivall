@@ -1,0 +1,59 @@
+name: Deploy to EC2
+
+on:
+  push:
+    branches:
+      - main # o master, segons el teu branch principal
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Deploy to EC2
+      uses: appleboy/ssh-action@v1.0.3
+      with:
+        host: ${{ secrets.EC2_HOST }}
+        username: ${{ secrets.EC2_USER }}
+        key: ${{ secrets.EC2_SSH_KEY }}
+        script: |
+          cd /var/www/agrivall
+          
+          # Si és el primer desplegament, clona el repo
+          if [ ! -d ".git" ]; then
+            git clone https://github.com/el-teu-usuari/el-teu-repo.git .
+          else
+            git pull origin main
+          fi
+          
+          # Instal·la dependències
+          composer install --no-dev --optimize-autoloader
+          
+          # Crea .env si no existeix
+          if [ ! -f ".env" ]; then
+            cp .env.example .env
+            php artisan key:generate
+          fi
+          
+          # Actualitza configuració de BD
+          sed -i "s/DB_DATABASE=.*/DB_DATABASE=${{ secrets.DB_DATABASE }}/" .env
+          sed -i "s/DB_USERNAME=.*/DB_USERNAME=${{ secrets.DB_USERNAME }}/" .env
+          sed -i "s/DB_PASSWORD=.*/DB_PASSWORD=${{ secrets.DB_PASSWORD }}/" .env
+          
+          # Permisos
+          sudo chown -R www-data:www-data /var/www/agrivall
+          sudo chmod -R 775 storage bootstrap/cache
+          
+          # Optimitzacions Laravel
+          php artisan config:cache
+          php artisan route:cache
+          php artisan view:cache
+          
+          # Migracions (opcional, comentar si no vols automàtic)
+          # php artisan migrate --force
+          
+          # Reinicia PHP-FPM
+          sudo systemctl restart php8.3-fpm
