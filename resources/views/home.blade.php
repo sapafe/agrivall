@@ -19,7 +19,7 @@
             </div>
             <nav>
                 <ul>
-                    <li><a href="#inicio">Inicio</a></li>
+                    <li><a href="#inicio">Inicio Prueba</a></li>
                     <li><a href="#productos">Productos</a></li>
                     <li><a href="#reserva">La Casilla</a></li>
                     <li><a href="#blog">Blog</a></li>
