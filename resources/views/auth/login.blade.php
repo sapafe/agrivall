@@ -8,11 +8,7 @@
 </head>
 <body>
 
-<header class="site-header">
-  <div class="container" style="padding:1rem 0; text-align:center;">
-    <a href="/" style="color:#fff; font-weight:700; text-decoration:none;">← Volver a inicio</a>
-  </div>
-</header>
+@include('partials.header')
 
 <main class="container section-container" style="max-width:520px;">
   <h1 class="section-title">Login</h1>
