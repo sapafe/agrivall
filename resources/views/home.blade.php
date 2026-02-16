@@ -15,7 +15,7 @@
     <header>
         <div class="container header-container">
             <div class="logo">
-                <img src="{{ asset('logo.png') }}" alt="AgriVall Logo">
+                <img src="{{ asset('images/logo.png') }}" alt="AgriVall Logo">
             </div>
             <nav>
                 <ul>
@@ -44,14 +44,14 @@
             <h2 class="section-title">Nuestros Productos</h2>
             <div class="productos-grid">
                 <div class="producto-card">
-                    <img src="{{ asset('producto1.jpg') }}" alt="Producto 1">
+                    <img src="{{ asset('images/producto1.jpg') }}" alt="Producto 1">
                     <h3>Producto 1</h3>
                     <p>Descripción breve del producto ecológico.</p>
                     <p class="precio">€10.00</p>
                     <button class="btn-secondary">Añadir al carrito</button>
                 </div>
                 <div class="producto-card">
-                    <img src="{{ asset('producto2.jpg') }}" alt="Producto 2">
+                    <img src="{{ asset('images/producto2.jpg') }}" alt="Producto 2">
                     <h3>Producto 2</h3>
                     <p>Descripción breve del producto ecológico.</p>
                     <p class="precio">€15.00</p>
@@ -65,6 +65,7 @@
     <section id="reserva" class="reserva-section">
         <div class="container section-container">
             <h2 class="section-title">Reserva La Casilla</h2>
+            <img src="{{ asset('images/casella/fachada.png') }}" alt="AgriVall fachada">
             <form action="#" class="reserva-form">
                 <label for="nombre">Nombre:</label>
                 <input type="text" id="nombre" name="nombre" required>
