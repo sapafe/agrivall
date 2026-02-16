@@ -21,7 +21,6 @@ jobs:
             php artisan optimize:clear
             php artisan migrate --force
             php artisan db:seed --class=UserSeeder --force
-            php artisan db:seed --class=PostTypeSeeder --force
             php artisan db:seed --class=PostSeeder --force
             php artisan config:cache
             php artisan route:cache
