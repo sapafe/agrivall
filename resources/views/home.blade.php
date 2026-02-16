@@ -65,7 +65,7 @@
     <section id="reserva" class="reserva-section">
         <div class="container section-container">
             <h2 class="section-title">Reserva La Casilla</h2>
-            <img src="{{ asset('images/casella/fachada.png') }}" alt="AgriVall fachada">
+            <img src="{{ asset('images/casella/fachada.jpg') }}" alt="AgriVall fachada">
             <form action="#" class="reserva-form">
                 <label for="nombre">Nombre:</label>
                 <input type="text" id="nombre" name="nombre" required>
