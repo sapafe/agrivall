@@ -4,17 +4,27 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Str;
 
 class PostSeeder extends Seeder
 {
     public function run(): void
     {
-        
+        // 1) Assegura que hi hagi post_types (seed inline, sense dependències)
+        $defaultTypes = ['Noticias', 'Recetas', 'Temporada', 'La Casilla', 'Consejos'];
+
+        foreach ($defaultTypes as $name) {
+            DB::table('post_types')->updateOrInsert(
+                ['name' => $name],
+                ['created_at' => now(), 'updated_at' => now()]
+            );
+        }
+
+        // 2) Torna a llegir ids (ara segur que no està buit)
         $typeIds = DB::table('post_types')->pluck('id')->all();
+
+        // Extra seguretat
         if (count($typeIds) === 0) {
-            $this->call(PostTypeSeeder::class);
-            $typeIds = DB::table('post_types')->pluck('id')->all();
+            throw new \RuntimeException("No s'han pogut crear/obtenir post_types. Revisa la BD.");
         }
 
         $titles = [
@@ -43,15 +53,16 @@ class PostSeeder extends Seeder
             null,
         ];
 
+        // 3) Insereix posts
         for ($i = 0; $i < 12; $i++) {
             $title = $titles[array_rand($titles)];
             $body  = $bodies[array_rand($bodies)];
 
-        DB::table('posts')->insert([
+            DB::table('posts')->insert([
                 'post_type_id' => $typeIds[array_rand($typeIds)],
                 'title'        => $title,
                 'body'         => $body,
-                'published_at' => now()->subDays(rand(0, 120))->toDateString(), // date
+                'published_at' => now()->subDays(rand(0, 120))->toDateString(),
                 'image'        => $images[array_rand($images)],
                 'created_at'   => now(),
                 'updated_at'   => now(),
