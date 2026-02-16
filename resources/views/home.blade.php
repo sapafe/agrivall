@@ -44,14 +44,14 @@
             <h2 class="section-title">Nuestros Productos</h2>
             <div class="productos-grid">
                 <div class="producto-card">
-                    <img src="{{ asset('images/producto1.jpg') }}" alt="Producto 1">
+                    <img src="{{ asset('images/cerezas.png') }}" alt="Producto 1">
                     <h3>Producto 1</h3>
                     <p>Descripción breve del producto ecológico.</p>
                     <p class="precio">€10.00</p>
                     <button class="btn-secondary">Añadir al carrito</button>
                 </div>
                 <div class="producto-card">
-                    <img src="{{ asset('images/producto2.jpg') }}" alt="Producto 2">
+                    <img src="{{ asset('images/albaricoques.png') }}" alt="Producto 2">
                     <h3>Producto 2</h3>
                     <p>Descripción breve del producto ecológico.</p>
                     <p class="precio">€15.00</p>
