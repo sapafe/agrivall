@@ -401,3 +401,32 @@ footer a {
 footer a:hover {
   text-decoration: underline;
 }
+
+.casella-gallery{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+.casella-gallery img{
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+.casella-reserva select{
+  padding: 0.8rem;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+}
+
+@media (max-width: 768px){
+  .casella-gallery{
+    grid-template-columns: 1fr;
+  }
+  .casella-gallery img{
+    height: 200px;
+  }
+}
