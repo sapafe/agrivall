@@ -2,6 +2,7 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
+  <meta name="author" content="Saraí Palop">
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>AgriVall - Productos Ecológicos y La Casilla</title>
 
@@ -17,7 +18,7 @@
     @include('partials.header')
 
 
-  <!-- LANDING / HERO -->
+  <!-- LANDING -->
   <section id="inicio" class="hero">
     <div class="container hero-container">
       <h1>Bienvenido a AgriVall</h1>

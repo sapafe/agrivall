@@ -14,7 +14,6 @@ Route::get('/blog', [PostController::class, 'index'])->name('posts.index');
 Route::get('/blog/{post}', [PostController::class, 'show'])->name('posts.show');
 
 Route::middleware('auth')->group(function () {
-    Route::get('/la-casella', [ReservationController::class, 'create'])->name('casella.create');
     Route::post('/la-casella/reservar', [ReservationController::class, 'store'])->name('casella.store');
 });
 Route::get('/login', [AuthController::class, 'show'])->name('login');
