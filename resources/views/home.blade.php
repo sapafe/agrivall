@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="author" content="Saraí Palop">
@@ -14,8 +15,9 @@
 
   <link rel="stylesheet" href="{{ asset('estil.css') }}">
 </head>
+
 <body>
-    @include('partials.header')
+  @include('partials.header')
 
 
   <!-- LANDING -->
@@ -31,23 +33,45 @@
   <section id="productos">
     <div class="container section-container">
       <h2 class="section-title">Nuestros Productos</h2>
-      <div class="productos-grid">
-        <div class="producto-card">
-          <img src="{{ asset('images/productos/cerezas.png') }}" alt="Cerezas">
-          <h3>Cerezas</h3>
-          <p>Descripción breve del producto ecológico.</p>
-          <p class="precio">€10.00</p>
-          <button class="btn-secondary">Añadir al carrito</button>
-        </div>
 
-        <div class="producto-card">
-          <img src="{{ asset('images/productos/albaricoques.png') }}" alt="Albaricoques">
-          <h3>Albaricoques</h3>
-          <p>Descripción breve del producto ecológico.</p>
-          <p class="precio">€15.00</p>
-          <button class="btn-secondary">Añadir al carrito</button>
-        </div>
+      @if(session('success'))
+      <div style="background-color: #d4edda; color: #155724; padding: 15px; border-radius: 4px; margin-bottom: 20px;">
+        {{ session('success') }}
+        <a href="{{ route('shop.cart') }}" style="color: #0b2e13; font-weight: bold; margin-left:10px;">Ver Carrito</a>
       </div>
+      @endif
+
+      <div class="productos-grid">
+        @foreach($products as $product)
+        <div class="producto-card"
+          style="display:flex; flex-direction:column; justify-content:space-between; height:100%;">
+          <div>
+            @if($product->image)
+            <img src="{{ asset($product->image) }}" alt="{{ $product->name }}">
+            @else
+            <div style="height: 200px; background: #eee; display: flex; align-items: center; justify-content: center;">
+              <span>Sin imagen</span>
+            </div>
+            @endif
+            <h3 style="margin-top: 15px;">{{ $product->name }} <span style="font-size:16px; color:#666;">({{
+                $product->variety }})</span></h3>
+            <p style="color:#555; font-size:14px; margin-bottom: 10px;">Formato: {{ $product->format }}</p>
+          </div>
+
+          <div>
+            <p class="precio">{{ number_format($product->price, 2) }} €</p>
+            <form action="{{ route('shop.cart.add') }}" method="POST">
+              @csrf
+              <input type="hidden" name="product_id" value="{{ $product->id }}">
+              <button type="submit" class="btn-secondary" style="width:100%;">Añadir al carrito</button>
+            </form>
+          </div>
+        </div>
+        @endforeach
+      </div>
+      @if($products->isEmpty())
+      <p style="text-align: center; color: #777;">Los productos se cargarán aquí desde la tienda.</p>
+      @endif
     </div>
   </section>
 
@@ -137,4 +161,5 @@
   </footer>
 
 </body>
+
 </html>

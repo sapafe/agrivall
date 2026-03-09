@@ -5,6 +5,7 @@
     <nav class="nav-desktop">
       <ul>
         <li><a href="/">Inici</a></li>
+        <li><a href="{{ route('shop.index') }}">Tienda</a></li>
         <li><a href="{{ route('posts.index') }}">Blog</a></li>
         <li><a href="{{ route('casella.create') }}">La Casella</a></li>
       </ul>
@@ -20,24 +21,26 @@
     {{-- Accions dreta --}}
     <div class="header-actions">
 
-      {{-- Carrito (placeholder) --}}
-      <a href="#" class="icon-btn" aria-label="Carrito">
+      {{-- Carrito --}}
+      <a href="{{ route('shop.cart') }}" class="icon-btn" aria-label="Carrito">
         <i class="fa-solid fa-cart-shopping"></i>
-        <span class="badge">0</span>
+        <span class="badge"
+          style="background: red; color: white; border-radius: 50%; padding: 2px 6px; font-size: 12px; position: absolute; top: -5px; right: -10px;">{{
+          session()->has('cart') ? collect(session('cart'))->sum('quantity') : 0 }}</span>
       </a>
 
       {{-- Login / Logout --}}
       @auth
-        <form method="POST" action="{{ route('logout') }}">
-          @csrf
-          <button class="icon-btn" type="submit" aria-label="Cerrar sesión">
-            <i class="fa-solid fa-right-from-bracket"></i>
-          </button>
-        </form>
+      <form method="POST" action="{{ route('logout') }}">
+        @csrf
+        <button class="icon-btn" type="submit" aria-label="Cerrar sesión">
+          <i class="fa-solid fa-right-from-bracket"></i>
+        </button>
+      </form>
       @else
-        <a class="icon-btn" href="{{ route('login') }}" aria-label="Login">
-          <i class="fa-regular fa-user"></i>
-        </a>
+      <a class="icon-btn" href="{{ route('login') }}" aria-label="Login">
+        <i class="fa-regular fa-user"></i>
+      </a>
       @endauth
 
       {{-- Idioma (placeholder) --}}
