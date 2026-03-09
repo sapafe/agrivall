@@ -32,12 +32,13 @@
             <td>{{ number_format($order->total, 2) }} €</td>
             <td>
                 <span style="padding: 4px 8px; border-radius: 4px; font-size: 14px; 
-                            @if($order->status == 'Pendiente') background: #fff3cd; color: #856404;
-                            @elseif($order->status == 'Pagado') background: #cce5ff; color: #004085;
-                            @elseif($order->status == 'Enviado') background: #d4edda; color: #155724;
-                            @else background: #e2e3e5; color: #383d41; @endif
+                            @if($order->status == 'INICIADO') background: #cce5ff; color: #004085;
+                            @elseif($order->status == 'EN PROCESO') background: #fff3cd; color: #856404;
+                            @elseif($order->status == 'REPARTO') background: #d4edda; color: #155724;
+                            @elseif($order->status == 'FINALIZADO') background: #e2e3e5; color: #383d41;
+                            @else background: #f8f9fa; color: #333; @endif
                         ">
-                    {{ ucfirst($order->status) }}
+                    {{ $order->status }}
                 </span>
             </td>
             <td>

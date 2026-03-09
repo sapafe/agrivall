@@ -31,7 +31,11 @@
 
       {{-- Login / Logout --}}
       @auth
-      <form method="POST" action="{{ route('logout') }}">
+      <a href="{{ route('admin.orders.index') }}" class="icon-btn" aria-label="Panel Admin"
+        style="color: #18bc9c; margin-right:5px;">
+        <i class="fa-solid fa-gauge"></i>
+      </a>
+      <form method="POST" action="{{ route('logout') }}" style="margin:0;">
         @csrf
         <button class="icon-btn" type="submit" aria-label="Cerrar sesión">
           <i class="fa-solid fa-right-from-bracket"></i>

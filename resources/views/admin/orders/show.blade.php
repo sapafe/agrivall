@@ -21,11 +21,10 @@
             @method('PUT')
             <label for="status" style="margin:0;">Estado:</label>
             <select name="status" id="status" style="padding: 8px; border-radius: 4px; border: 1px solid #ddd;">
-                <option value="Pendiente" {{ $order->status == 'Pendiente' ? 'selected' : '' }}>Pendiente</option>
-                <option value="Pagado" {{ $order->status == 'Pagado' ? 'selected' : '' }}>Pagado</option>
-                <option value="Enviado" {{ $order->status == 'Enviado' ? 'selected' : '' }}>Enviado</option>
-                <option value="Completado" {{ $order->status == 'Completado' ? 'selected' : '' }}>Completado</option>
-                <option value="Cancelado" {{ $order->status == 'Cancelado' ? 'selected' : '' }}>Cancelado</option>
+                <option value="INICIADO" {{ $order->status == 'INICIADO' ? 'selected' : '' }}>INICIADO</option>
+                <option value="EN PROCESO" {{ $order->status == 'EN PROCESO' ? 'selected' : '' }}>EN PROCESO</option>
+                <option value="REPARTO" {{ $order->status == 'REPARTO' ? 'selected' : '' }}>REPARTO</option>
+                <option value="FINALIZADO" {{ $order->status == 'FINALIZADO' ? 'selected' : '' }}>FINALIZADO</option>
             </select>
             <button type="submit" class="btn-primary" style="padding: 8px 15px;">Actualizar</button>
         </form>

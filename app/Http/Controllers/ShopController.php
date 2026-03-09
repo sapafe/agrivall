@@ -110,7 +110,7 @@ class ShopController extends Controller
                 'customer_phone' => $request->customer_phone,
                 'shipping_address' => $request->shipping_address,
                 'payment_method' => $request->payment_method,
-                'status' => 'Pendiente',
+                'status' => 'INICIADO',
                 'total' => $total,
                 'ordered_at' => now(),
             ]);
@@ -131,7 +131,7 @@ class ShopController extends Controller
 
             // Send Email to Customer
             Mail::to($order->customer_email)->send(new \App\Mail\OrderConfirmed($order));
-            
+
             // Optionally send to Admin too
             // Mail::to(config('mail.from.address'))->send(new \App\Mail\OrderConfirmed($order));
 
