@@ -8,7 +8,7 @@
         <li><a href="/">Inicio</a></li>
         <li><a href="{{ route('shop.index') }}">Tienda</a></li>
         <li><a href="{{ route('posts.index') }}">Blog</a></li>
-        <li><a href="{{ route('casella.create') }}">La Casella</a></li>
+        <li><a href="{{ route('casella.create') }}">La Casilla</a></li>
       </ul>
     </nav>
 
@@ -72,7 +72,7 @@
       <li><a href="/">Inicio</a></li>
       <li><a href="{{ route('shop.index') }}">Tienda</a></li>
       <li><a href="{{ route('posts.index') }}">Blog</a></li>
-      <li><a href="{{ route('casella.create') }}">La Casella</a></li>
+      <li><a href="{{ route('casella.create') }}">La Casilla</a></li>
     </ul>
 
     <div class="mobile-actions">

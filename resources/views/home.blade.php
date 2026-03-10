@@ -25,7 +25,6 @@
     <div class="container hero-container">
       <h1>Bienvenido a AgriVall</h1>
       <p>Productos ecológicos frescos y La Casilla</p>
-      <a href="{{ route('shop.index') }}" class="btn-primary">Ver Productos</a>
     </div>
   </section>
 
@@ -69,9 +68,9 @@
         </div>
         @endforeach
       </div>
-      @if($products->isEmpty())
-      <p style="text-align: center; color: #777;">Los productos se cargarán aquí desde la tienda.</p>
-      @endif
+      <div style="text-align: center; margin-top: 2rem;">
+        <a href="{{ route('shop.index') }}" class="btn-primary">Ver todos los productos</a>
+      </div>
     </div>
   </section>
 
@@ -119,12 +118,6 @@
           <a href="#" class="btn-secondary">Leer más</a>
         </div>
       </div>
-
-      <form class="newsletter-form">
-        <h3>Suscríbete a nuestro Blog</h3>
-        <input type="email" placeholder="Tu email" required>
-        <button type="submit" class="btn-primary">Suscribirse</button>
-      </form>
     </div>
   </section>
 
@@ -148,17 +141,7 @@
     </div>
   </section>
 
-  <!-- FOOTER -->
-  <footer>
-    <div class="container footer-container">
-      <p>&copy; 2025 AgriVall. Todos los derechos reservados.</p>
-      <ul>
-        <li><a href="#">Aviso Legal</a></li>
-        <li><a href="#">Política de Privacidad</a></li>
-        <li><a href="#">Política de Cancelación</a></li>
-      </ul>
-    </div>
-  </footer>
+  @include('partials.footer')
 
 </body>
 
