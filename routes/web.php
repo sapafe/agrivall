@@ -9,7 +9,7 @@ use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\OrderController;
 
 Route::get('/', function () {
-    $products = \App\Models\Product::where('available', true)->take(4)->get();
+    $products = \App\Models\Product::where('available', true)->take(2)->get();
     return view('home', compact('products'));
 });
 

@@ -17,7 +17,7 @@
 
     <section style="padding: 120px 0 60px 0; background-color: #f9f9f9;">
         <div class="container section-container">
-            <h2 class="section-title">Tienda de Frutas</h2>
+            <h2 class="section-title">Productos ecológicos</h2>
 
             @if(session('success'))
             <div

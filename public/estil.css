@@ -342,10 +342,23 @@ body {
 
 .blog-card {
   background-color: white;
-  padding: 1rem;
+  padding: 1.5rem;
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0,0,0,0.1);
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.blog-card h3 {
+  margin-bottom: 0.75rem;
+}
+
+.blog-card p {
+  margin-bottom: 1.5rem;
+  color: #666;
 }
 
 .blog-card img {

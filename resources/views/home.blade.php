@@ -25,7 +25,7 @@
     <div class="container hero-container">
       <h1>Bienvenido a AgriVall</h1>
       <p>Productos ecológicos frescos y La Casilla</p>
-      <a href="#productos" class="btn-primary">Ver Productos</a>
+      <a href="{{ route('shop.index') }}" class="btn-primary">Ver Productos</a>
     </div>
   </section>
 

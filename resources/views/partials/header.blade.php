@@ -1,10 +1,11 @@
 <header class="site-header">
+  <input type="checkbox" id="menu-toggle" class="menu-toggle">
   <div class="container header-container">
 
     {{-- Menú esquerra --}}
     <nav class="nav-desktop">
       <ul>
-        <li><a href="/">Inici</a></li>
+        <li><a href="/">Inicio</a></li>
         <li><a href="{{ route('shop.index') }}">Tienda</a></li>
         <li><a href="{{ route('posts.index') }}">Blog</a></li>
         <li><a href="{{ route('casella.create') }}">La Casella</a></li>
@@ -59,9 +60,27 @@
       </div>
 
       {{-- Hamburguesa (mòbil) --}}
-      <button class="hamburger" aria-label="Menú">
+      <label for="menu-toggle" class="hamburger" aria-label="Menú">
         <i class="fa-solid fa-bars"></i>
-      </button>
+      </label>
     </div>
   </div>
+
+  {{-- Menú móvil --}}
+  <nav class="nav-mobile">
+    <ul>
+      <li><a href="/">Inicio</a></li>
+      <li><a href="{{ route('shop.index') }}">Tienda</a></li>
+      <li><a href="{{ route('posts.index') }}">Blog</a></li>
+      <li><a href="{{ route('casella.create') }}">La Casella</a></li>
+    </ul>
+
+    <div class="mobile-actions">
+      <div class="mobile-lang">
+        <span>Idioma:</span>
+        <a href="#">Català</a>
+        <a href="#">Castellano</a>
+      </div>
+    </div>
+  </nav>
 </header>
