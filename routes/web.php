@@ -13,10 +13,6 @@ Route::get('/', function () {
     return view('home', compact('products'));
 });
 
-Route::get('/seed', function () {
-    \Illuminate\Support\Facades\Artisan::call('db:seed', ['--class' => 'DatabaseSeeder']);
-    return "¡Base de datos sembrada con éxito! (Productos, Posts y 54 Semanas creadas).";
-});
 
 Route::get('/blog', [PostController::class , 'index'])->name('posts.index');
 Route::get('/blog/{post}', [PostController::class , 'show'])->name('posts.show');
