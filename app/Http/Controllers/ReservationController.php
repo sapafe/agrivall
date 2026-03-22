@@ -10,17 +10,19 @@ class ReservationController extends Controller
 {
     public function create()
     {
-        // semanas disponibles (ajusta el status según tu app)
-        $weeks = Week::orderBy('year', 'desc')
-            ->orderBy('week_number', 'desc')
-            ->get();
+        $weeks = Week::orderBy('year', 'asc')
+            ->orderBy('week_number', 'asc')
+            ->where('year', '>=', 2026)
+            ->get()
+            ->groupBy(function($week) {
+                return $week->year . '-' . str_pad($week->month, 2, '0', STR_PAD_LEFT);
+            });
 
         return view('casella.create', compact('weeks'));
     }
 
     public function store(Request $request)
     {
-        // Si aún no tienes login, deja esto en comentario y lo hacemos "sin user" temporal.
         $data = $request->validate([
             'week_id' => ['required', 'exists:weeks,id'],
             'name' => ['required', 'string', 'max:255'],
@@ -28,19 +30,34 @@ class ReservationController extends Controller
             'message' => ['nullable', 'string', 'max:2000'],
         ]);
 
-        // Si quieres que la reserva vaya ligada a user_id como en tu migración:
-        // necesitas estar logueada. De momento, obligamos login:
-        if (!auth()->check()) {
-            return redirect()->route('login');
+        $week = Week::findOrFail($data['week_id']);
+        
+        if ($week->status !== 'LIBRE') {
+            return back()->withErrors(['week_id' => 'Esta semana ya no está disponible.']);
         }
 
+        // Guardar la reserva
         Reservation::create([
             'week_id' => $data['week_id'],
-            'user_id' => auth()->id(),
+            'user_id' => auth()->id() ?? 1, // Fallback al admin o primer usuario si no hay autenticación
             'reserved_at' => now(),
-            'status' => 'pending',
+            'status' => 'pendiente',
         ]);
 
-        return redirect()->route('casella.create')->with('ok', '¡Reserva enviada! Te contactaremos pronto.');
+        // Actualizar el estado de la semana
+        $week->update(['status' => 'PRE-RESERVA']);
+
+        // Enviar Correo electrónico
+        \Illuminate\Support\Facades\Mail::to(config('mail.from.address'))
+            ->send(new \App\Mail\ReservationRequested([
+                'name' => $data['name'],
+                'email' => $data['email'],
+                'message' => $data['message'],
+                'week_descriptor' => $week->descriptor,
+                'week_number' => $week->week_number,
+                'year' => $week->year,
+            ]));
+
+        return redirect()->route('casella.create')->with('ok', '¡Reserva enviada! El estado de la semana ha pasado a PRE-RESERVA. Te contactaremos pronto.');
     }
 }

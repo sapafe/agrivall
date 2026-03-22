@@ -504,3 +504,144 @@ footer a:hover {
     height: 200px;
   }
 }
+/* WEEKS GRID */
+.weeks-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2.5rem;
+}
+
+.week-card {
+  background: white;
+  border: 2px solid #eee;
+  border-radius: 16px;
+  padding: 1.5rem;
+  text-align: center;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 160px;
+}
+
+.week-card:hover:not(.disabled) {
+  transform: translateY(-8px);
+  border-color: #2a7f2a;
+  box-shadow: 0 12px 24px rgba(42, 127, 42, 0.1);
+}
+
+.week-card.selected {
+  border-color: #2a7f2a;
+  background-color: #f0f7f0;
+  box-shadow: 0 0 0 4px rgba(42, 127, 42, 0.15);
+}
+
+.week-card .week-num {
+  font-size: 0.8rem;
+  color: #666;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.week-card .week-desc {
+  font-size: 1.2rem;
+  font-weight: 800;
+  margin-bottom: 0.5rem;
+  color: #1a1a1a;
+}
+
+.week-card .week-price {
+  font-weight: 700;
+  color: #2a7f2a;
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+}
+
+.week-card .week-status {
+  font-size: 0.7rem;
+  padding: 6px 12px;
+  border-radius: 99px;
+  font-weight: 800;
+  display: inline-block;
+  align-self: center;
+  text-transform: uppercase;
+}
+
+.status-libre { background: #e8f5e9; color: #2e7d32; }
+.status-pre-reserva { background: #fff8e1; color: #f57f17; }
+.status-reservado { background: #ffebee; color: #c62828; }
+.status-no-disponible { background: #f5f5f5; color: #616161; }
+
+.week-card.disabled {
+  opacity: 0.5;
+  filter: grayscale(1);
+  cursor: not-allowed;
+}
+
+.week-card.disabled::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: transparent;
+  z-index: 10;
+}
+
+/* Month Tabs (Calendario Casella) */
+.month-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+.month-tab {
+  background: #f0f7f0;
+  border: 1px solid #c8e1c8;
+  padding: 8px 14px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 0.9rem;
+  transition: all .3s ease;
+  color: #2d5a27;
+}
+
+.month-tab:hover {
+  background: #e1f0e1;
+}
+
+.month-tab.active {
+  background: #2d5a27;
+  color: #fff;
+  border-color: #2d5a27;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.month-tab small {
+  display: block;
+  font-size: 0.65rem;
+  opacity: 0.8;
+  margin-top: 2px;
+}
+
+/* Month Containers */
+.month-container {
+  display: none;
+  animation: fadeIn 0.4s ease;
+}
+
+.month-container.active {
+  display: block;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}

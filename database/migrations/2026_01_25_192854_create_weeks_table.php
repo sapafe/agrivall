@@ -16,8 +16,9 @@ return new class extends Migration
             $table->smallInteger('year');
             $table->tinyInteger('week_number');
             $table->string('descriptor');
-            $table->decimal('price', 8, 2);
-            $table->string('status');
+            $table->unsignedTinyInteger('month'); // Mes del inicio de la semana (1-12)
+            $table->decimal('price', 8, 2)->default(0);
+            $table->string('status')->default('LIBRE'); // Estados: LIBRE, PRE-RESERVA, RESERVADO, NO DISPONIBLE
             $table->timestamps();
         });
     }

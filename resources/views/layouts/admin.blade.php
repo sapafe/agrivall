@@ -66,6 +66,7 @@
             <nav>
                 <a href="{{ route('admin.products.index') }}"><i class="fa-solid fa-box"></i> Productos</a>
                 <a href="{{ route('admin.orders.index') }}"><i class="fa-solid fa-shopping-cart"></i> Pedidos</a>
+                <a href="{{ route('admin.weeks.index') }}"><i class="fa-solid fa-calendar-days"></i> Semanas</a>
             </nav>
         </aside>
 

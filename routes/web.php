@@ -39,6 +39,7 @@ Route::middleware('auth')->group(function () {
             Route::get('orders', [OrderController::class , 'index'])->name('orders.index');
             Route::get('orders/{order}', [OrderController::class , 'show'])->name('orders.show');
             Route::put('orders/{order}/status', [OrderController::class , 'updateStatus'])->name('orders.updateStatus');
+            Route::resource('weeks', \App\Http\Controllers\Admin\WeekController::class)->except(['create', 'store', 'destroy']);
         }
         );
     });
