@@ -15,7 +15,7 @@ Route::get('/', function () {
 
 Route::get('/seed', function () {
     \Illuminate\Support\Facades\Artisan::call('db:seed', ['--class' => 'DatabaseSeeder']);
-    return "¡Productos creados exitosamente! Ahora puedes volver a la portada y verlos.";
+    return "¡Base de datos sembrada con éxito! (Productos, Posts y 54 Semanas creadas).";
 });
 
 Route::get('/blog', [PostController::class , 'index'])->name('posts.index');
