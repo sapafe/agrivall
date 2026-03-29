@@ -56,6 +56,10 @@ class ShopController extends Controller
             $cart[$request->id]["quantity"] = $request->quantity;
             session()->put('cart', $cart);
             session()->flash('success', 'Carrito actualizado');
+
+            if ($request->ajax()) {
+                return response()->json(['success' => true, 'message' => 'Carrito actualizado']);
+            }
         }
         return redirect()->route('shop.cart');
     }
@@ -69,6 +73,10 @@ class ShopController extends Controller
                 session()->put('cart', $cart);
             }
             session()->flash('success', 'Producto eliminado');
+
+            if ($request->ajax()) {
+                return response()->json(['success' => true, 'message' => 'Producto eliminado']);
+            }
         }
         return redirect()->route('shop.cart');
     }

@@ -4,17 +4,18 @@
     <meta charset="UTF-8">
     <title>{{ $post->title }} - AgriVall</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ asset('estil.css') }}?v={{ filemtime(public_path('estil.css')) }}">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    @vite(['resources/css/base.css', 'resources/css/blog.css'])
 </head>
 <body>
 
 @include('partials.header')
 
 
-<main class="container section-container" style="max-width:900px;">
-    <h1>{{ $post->title }}</h1>
+<main class="container section-container post-detail">
+    <h1 class="section-title">{{ $post->title }}</h1>
 
-    <p style="opacity:.7; margin-bottom:1.5rem;">
+    <p class="post-date">
         {{ $post->published_at->format('d/m/Y') }}
     </p>
 
@@ -22,11 +23,10 @@
         <img
             src="{{ asset($post->image) }}"
             alt="{{ $post->title }}"
-            style="width:100%; max-height:420px; object-fit:cover; border-radius:12px; margin-bottom:1.5rem;"
         >
     @endif
 
-    <div style="white-space: pre-line; font-size:1.05rem;">
+    <div class="post-content">
         {{ $post->body }}
     </div>
 </main>

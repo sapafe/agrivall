@@ -4,7 +4,9 @@
     <meta charset="UTF-8">
     <title>Blog - AgriVall</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ asset('estil.css') }}?v={{ filemtime(public_path('estil.css')) }}">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    @vite(['resources/css/base.css', 'resources/css/blog.css'])
 </head>
 <body>
 
@@ -23,7 +25,7 @@
 
                 <h3>{{ $post->title }}</h3>
 
-                <p style="opacity:.7; margin-bottom:.75rem;">
+                <p class="post-date">
                     {{ $post->published_at->format('d/m/Y') }}
                 </p>
 

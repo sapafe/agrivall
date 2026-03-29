@@ -6,55 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@yield('title', 'AgriVall - Admin')</title>
 
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    
+    <!-- Bootstrap para Backoffice -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    <link rel="stylesheet" href="{{ asset('estil.css') }}">
-    <style>
-        /* Basic admin dashboard styles */
-        .admin-layout {
-            display: flex;
-            min-height: 100vh;
-        }
-
-        .admin-sidebar {
-            width: 250px;
-            background: #2c3e50;
-            color: white;
-            padding: 20px;
-        }
-
-        .admin-sidebar a {
-            color: white;
-            display: block;
-            padding: 10px 0;
-            text-decoration: none;
-        }
-
-        .admin-sidebar a:hover {
-            color: #18bc9c;
-        }
-
-        .admin-content {
-            flex: 1;
-            padding: 30px;
-            background: #f4f6f9;
-        }
-
-        .admin-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-            background: white;
-        }
-
-        .admin-table th,
-        .admin-table td {
-            border: 1px solid #ddd;
-            padding: 12px;
-            text-align: left;
-        }
-    </style>
+    @vite(['resources/css/base.css', 'resources/css/admin.css'])
 </head>
 
 <body>
@@ -62,7 +19,7 @@
 
     <div class="admin-layout">
         <aside class="admin-sidebar">
-            <h2 style="color:white; margin-bottom: 20px;">Admin Panel</h2>
+            <h2>Admin Panel</h2>
             <nav>
                 <a href="{{ route('admin.products.index') }}"><i class="fa-solid fa-box"></i> Productos</a>
                 <a href="{{ route('admin.orders.index') }}"><i class="fa-solid fa-shopping-cart"></i> Pedidos</a>
@@ -72,16 +29,14 @@
 
         <main class="admin-content">
             @if(session('success'))
-            <div class="alert alert-success"
-                style="background:#d4edda; color:#155724; padding:10px; margin-bottom:20px; border-radius: 4px;">
+            <div class="alert alert-success">
                 {{ session('success') }}
             </div>
             @endif
 
             @if($errors->any())
-            <div class="alert alert-danger"
-                style="background:#f8d7da; color:#721c24; padding:10px; margin-bottom:20px; border-radius: 4px;">
-                <ul>
+            <div class="alert alert-danger">
+                <ul class="mb-0">
                     @foreach($errors->all() as $error)
                     <li>{{ $error }}</li>
                     @endforeach

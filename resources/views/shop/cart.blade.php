@@ -4,121 +4,110 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Carrito - AgriVall</title>
 
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-    <link rel="stylesheet" href="{{ asset('estil.css') }}">
-    <style>
-        .cart-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 30px;
-            background: white;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-        }
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-        .cart-table th,
-        .cart-table td {
-            padding: 15px;
-            text-align: left;
-            border-bottom: 1px solid #eee;
-        }
-
-        .cart-table th {
-            background: #f8f9fa;
-        }
-    </style>
+    @vite(['resources/css/base.css', 'resources/css/cart.css', 'resources/js/cart.js'])
 </head>
 
 <body>
     @include('partials.header')
 
-    <section style="padding: 120px 0 60px 0; background-color: #f9f9f9; min-height: 80vh;">
+    <section class="shop-section min-height-80">
         <div class="container section-container">
             <h2 class="section-title">Tu Carrito</h2>
 
             @if(session('success'))
-            <div
-                style="background-color: #d4edda; color: #155724; padding: 15px; border-radius: 4px; margin-bottom: 20px;">
+            <div class="alert alert-success">
                 {{ session('success') }}
             </div>
             @endif
 
-            @if(empty($cart))
-            <div style="text-align: center; padding: 50px 0;">
-                <i class="fa-solid fa-cart-shopping" style="font-size: 50px; color: #ccc; margin-bottom: 20px;"></i>
-                <p style="font-size: 18px; color: #666;">Tu carrito está vacío.</p>
-                <a href="{{ route('shop.index') }}" class="btn-primary"
-                    style="margin-top:20px; display:inline-block;">Volver a la tienda</a>
-            </div>
-            @else
-            <table class="cart-table">
-                <thead>
-                    <tr>
-                        <th>Producto</th>
-                        <th>Formato</th>
-                        <th>Precio</th>
-                        <th>Cantidad</th>
-                        <th>Subtotal</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach($cart as $id => $details)
-                    <tr>
-                        <td>
-                            <div style="display:flex; align-items:center; gap:15px;">
-                                @if(isset($details['image']) && $details['image'])
-                                <img src="{{ asset($details['image']) }}" alt=""
-                                    style="width:60px; height:60px; object-fit:cover; border-radius:4px;">
-                                @endif
-                                <strong>{{ $details['name'] }}</strong>
-                            </div>
-                        </td>
-                        <td>{{ $details['format'] }}</td>
-                        <td>{{ number_format($details['price'], 2) }} €</td>
-                        <td>
-                            <form action="{{ route('shop.cart.update') }}" method="POST"
-                                style="display:flex; gap:10px;">
-                                @csrf
-                                @method('PUT')
-                                <input type="hidden" name="id" value="{{ $id }}">
-                                <input type="number" name="quantity" value="{{ $details['quantity'] }}" min="1"
-                                    style="width: 60px; padding: 5px; border:1px solid #ddd; border-radius:4px;">
-                                <button type="submit"
-                                    style="background:none; border:none; color:#3498db; cursor:pointer;"
-                                    title="Actualizar"><i class="fa-solid fa-arrows-rotate"></i></button>
-                            </form>
-                        </td>
-                        <td>{{ number_format($details['price'] * $details['quantity'], 2) }} €</td>
-                        <td style="text-align: right;">
-                            <form action="{{ route('shop.cart.remove') }}" method="POST">
-                                @csrf
-                                @method('DELETE')
-                                <input type="hidden" name="id" value="{{ $id }}">
-                                <button type="submit"
-                                    style="background:none; border:none; color:#e74c3c; cursor:pointer;"
-                                    title="Eliminar"><i class="fa-solid fa-trash"></i></button>
-                            </form>
-                        </td>
-                    </tr>
-                    @endforeach
-                </tbody>
-            </table>
+            <div id="cart-content" @if(empty($cart)) class="hidden" @endif>
+                <table class="cart-table">
+                    <thead>
+                        <tr>
+                            <th>Producto</th>
+                            <th class="hide-mobile">Formato</th>
+                            <th>Precio</th>
+                            <th>Cantidad</th>
+                            <th>Subtotal</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody id="cart-body">
+                        @foreach($cart as $id => $details)
+                        <tr data-id="{{ $id }}">
+                            <td>
+                                <div class="cart-item-info">
+                                    @if(isset($details['image']) && $details['image'])
+                                    <img src="{{ asset($details['image']) }}" alt="" class="cart-item-img">
+                                    @endif
+                                    <strong>{{ $details['name'] }}</strong>
+                                </div>
+                            </td>
+                            <td class="hide-mobile">{{ $details['format'] }}</td>
+                            <td>{{ number_format($details['price'], 2) }} €</td>
+                            <td>
+                                <div class="qty-control">
+                                    <button type="button" class="btn-minus">-</button>
+                                    <input type="number" min="1" class="input-qty" value="{{ $details['quantity'] }}">
+                                    <button type="button" class="btn-plus">+</button>
+                                </div>
+                            </td>
+                            <td class="cell-amount">{{ number_format($details['price'] * $details['quantity'], 2) }} €</td>
+                            <td class="cell-actions">
+                                <button type="button" class="btn-remove" title="Eliminar">
+                                    <i class="fa-solid fa-trash"></i>
+                                </button>
+                            </td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
 
-            <div
-                style="background: white; padding: 20px; border-radius: 4px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); text-align: right;">
-                <h3 style="margin-bottom: 20px;">Total: {{ number_format($total, 2) }} €</h3>
-                <div style="display:flex; justify-content: flex-end; gap: 15px;">
-                    <a href="{{ route('shop.index') }}" class="btn-secondary" style="text-decoration: none;">Seguir
-                        comprando</a>
-                    <a href="{{ route('shop.checkout') }}" class="btn-primary" style="text-decoration: none;">Ir al
-                        Checkout</a>
+                <div class="promo-container">
+                    <form id="promo-form" class="promo-inline-form">
+                        <input type="text" id="promo-code" placeholder="Código promocional">
+                        <button type="submit" class="btn-secondary">Aplicar</button>
+                        <span id="promo-msg"></span>
+                    </form>
+                </div>
+
+                <div class="totals-container">
+                    <div class="totals-row">
+                        <span>Subtotal:</span>
+                        <strong id="subtotal">0,00 €</strong>
+                    </div>
+                    <div class="totals-row">
+                        <span>IVA (21%):</span>
+                        <strong id="iva">0,00 €</strong>
+                    </div>
+                    <div class="totals-row">
+                        <span>Descuento:</span>
+                        <strong id="discount">0,00 €</strong>
+                    </div>
+                    <div class="total-final">
+                        Total: <span id="total-final">0,00 €</span>
+                    </div>
+
+                    <div class="cart-actions-bottom">
+                        <a href="{{ route('shop.index') }}" class="btn-secondary">Seguir comprando</a>
+                        <a href="{{ route('shop.checkout') }}" class="btn-primary">Ir al Checkout</a>
+                    </div>
                 </div>
             </div>
-            @endif
+
+            <div id="empty-cart-msg" @if(!empty($cart)) class="hidden" @endif class="empty-cart-container">
+                <i class="fa-solid fa-cart-shopping empty-cart-icon"></i>
+                <p class="empty-cart-text">Tu carrito está vacío.</p>
+                <a href="{{ route('shop.index') }}" class="btn-primary">Volver a la tienda</a>
+            </div>
 
         </div>
     </section>
@@ -128,6 +117,17 @@
             <p>&copy; 2025 AgriVall. Todos los derechos reservados.</p>
         </div>
     </footer>
+
+    <script>
+        window.Agrivall = {
+            baseUrl: "{{ asset('/') }}"
+        };
+        // Ensure SEED is a simple array of objects with numerical IDs
+        const SEED = @json(collect($cart)->map(fn($item, $id) => array_merge($item, ['id' => (int)$id]))->values());
+        console.log("SEED data initialized from Blade:", SEED);
+    </script>
 </body>
+
+</html>
 
 </html>

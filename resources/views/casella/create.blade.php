@@ -10,7 +10,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Mistake+Note&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-  <link rel="stylesheet" href="{{ asset('estil.css') }}?v={{ filemtime(public_path('estil.css')) }}">
+  @vite(['resources/css/base.css', 'resources/css/casella.css'])
 </head>
 
 <body>
@@ -18,18 +18,17 @@
   @include('partials.header')
 
 
-  <main class="container section-container" style="max-width: 1000px;">
+  <main class="container section-container casella-main">
     <h1 class="section-title">La Casilla</h1>
 
     @if(session('ok'))
-    <div
-      style="background:#e8ffe8; border:1px solid #b6f2b6; padding:12px 14px; border-radius:10px; margin-bottom: 1rem;">
+    <div class="alert alert-success">
       {{ session('ok') }}
     </div>
     @endif
 
-    <section style="margin-bottom: 2.5rem;">
-      <p style="text-align:center; max-width: 720px; margin: 0 auto 1.5rem;">
+    <section class="casella-intro">
+      <p class="center-content intro-text">
         Un espacio para desconectar, respirar naturaleza y disfrutar de productos de temporada.
         Reserva una semana y te contactaremos para confirmar disponibilidad.
       </p>
@@ -47,7 +46,7 @@
     </section>
 
     <section class="casella-reserva">
-      <h2 style="margin-bottom: 2rem; text-align:center;">Calendario de Disponibilidad</h2>
+      <h2 class="calendar-title">Calendario de Disponibilidad</h2>
 
       @php
         $monthNames = [
@@ -94,14 +93,14 @@
         @endforeach
       </div>
 
-      <h2 style="margin-bottom: 1rem; text-align:center;">Solicitar Reserva</h2>
+      <h2 class="form-title">Solicitar Reserva</h2>
       
       <form action="{{ route('casella.store') }}" method="POST" class="reserva-form" id="reservaForm">
         @csrf
 
         <input type="hidden" id="week_id" name="week_id" required>
 
-        <div id="selected-week-info" style="text-align:center; padding: 10px; background: #f0f7f0; border-radius: 8px; margin-bottom: 1rem; display: none;">
+        <div id="selected-week-info" class="selected-week-notice hidden">
           Has seleccionado: <strong id="week-display-name"></strong>
         </div>
 
@@ -118,39 +117,45 @@
       </form>
 
       <script>
-        function selectWeek(id, element) {
-          if (element.classList.contains('disabled')) return;
-
-          // Desmarcar anteriores
-          document.querySelectorAll('.week-card').forEach(el => el.classList.remove('selected'));
-          
-          // Marcar actual
-          element.classList.add('selected');
-          
-          // Actualizar input y display
-          document.getElementById('week_id').value = id;
-          document.getElementById('week-display-name').textContent = element.querySelector('.week-desc').textContent + " (S" + element.querySelector('.week-num').textContent.split(' ')[1] + ")";
-          document.getElementById('selected-week-info').style.display = 'block';
-          
-          // Habilitar botón
-          document.getElementById('btn-submit').disabled = false;
-        }
-
-        function showMonth(monthNum, btn) {
+        function showMonth(monthKey, btn) {
           // Ocultar todos los contenedores
           document.querySelectorAll('.month-container').forEach(c => c.classList.remove('active'));
           // Mostrar el seleccionado
-          document.getElementById('month-' + monthNum).classList.add('active');
-          // Actualizar botones
+          document.getElementById('month-' + monthKey).classList.add('active');
+          // Actualizar estado de los botones (tabs)
           document.querySelectorAll('.month-tab').forEach(b => b.classList.remove('active'));
           btn.classList.add('active');
+        }
+
+        function selectWeek(id, element) {
+          if (element.classList.contains('disabled')) return;
+
+          // Desmarcar todos los anteriores
+          document.querySelectorAll('.week-card').forEach(el => el.classList.remove('selected'));
+          
+          // Marcar el actual como seleccionado
+          element.classList.add('selected');
+          
+          // Actualizar el valor del input hidden
+          document.getElementById('week_id').value = id;
+          
+          // Mostrar información de la semana seleccionada en el formulario
+          const weekNum = element.querySelector('.week-num').textContent;
+          const weekDesc = element.querySelector('.week-desc').textContent;
+          document.getElementById('week-display-name').textContent = weekDesc + " (" + weekNum + ")";
+          document.getElementById('selected-week-info').classList.remove('hidden');
+          
+          // Habilitar el botón de envío
+          document.getElementById('btn-submit').disabled = false;
+          
+          // Scroll suave hacia el formulario para confirmar la selección
+          document.getElementById('reservaForm').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
         }
       </script>
 
       @if($errors->any())
-      <div
-        style="margin-top:1rem; background:#ffecec; border:1px solid #ffb8b8; padding:12px 14px; border-radius:10px;">
-        <ul style="margin-left: 1rem;">
+      <div class="alert alert-danger margin-top-1">
+        <ul class="error-list">
           @foreach($errors->all() as $e)
           <li>{{ $e }}</li>
           @endforeach

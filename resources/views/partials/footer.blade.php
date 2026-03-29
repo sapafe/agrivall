@@ -1,11 +1,10 @@
 <footer>
     <div class="container footer-newsletter">
         <div class="newsletter-content">
-            <h3 style="margin: 0;">Suscríbete a nuestro Blog</h3>
-            <form class="newsletter-inline-form" style="position: relative; max-width: 350px;">
-                <input type="email" placeholder="Tu email" required style="width: 100%; padding-right: 45px;">
-                <button type="submit" class="btn-primary"
-                    style="position: absolute; right: 5px; top: 5px; bottom: 5px; padding: 0 12px; border-radius: 4px;">
+            <h3>Suscríbete a nuestro Blog</h3>
+            <form class="newsletter-form">
+                <input type="email" placeholder="Tu email" required>
+                <button type="submit" class="btn-primary">
                     <i class="fa-solid fa-arrow-right"></i>
                 </button>
             </form>
@@ -19,5 +18,4 @@
             <li><a href="#">Política de Cancelación</a></li>
         </ul>
     </div>
-</footer>>
 </footer>

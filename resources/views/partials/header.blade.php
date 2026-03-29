@@ -25,18 +25,16 @@
       {{-- Carrito --}}
       <a href="{{ route('shop.cart') }}" class="icon-btn" aria-label="Carrito">
         <i class="fa-solid fa-cart-shopping"></i>
-        <span class="badge"
-          style="background: red; color: white; border-radius: 50%; padding: 2px 6px; font-size: 12px; position: absolute; top: -5px; right: -10px;">{{
+        <span class="badge cart-badge">{{
           session()->has('cart') ? collect(session('cart'))->sum('quantity') : 0 }}</span>
       </a>
 
       {{-- Login / Logout --}}
       @auth
-      <a href="{{ route('admin.orders.index') }}" class="icon-btn" aria-label="Panel Admin"
-        style="color: #18bc9c; margin-right:5px;">
+      <a href="{{ route('admin.orders.index') }}" class="icon-btn admin-gauge-btn" aria-label="Panel Admin">
         <i class="fa-solid fa-gauge"></i>
       </a>
-      <form method="POST" action="{{ route('logout') }}" style="margin:0;">
+      <form method="POST" action="{{ route('logout') }}" class="logout-form">
         @csrf
         <button class="icon-btn" type="submit" aria-label="Cerrar sesión">
           <i class="fa-solid fa-right-from-bracket"></i>
@@ -66,7 +64,7 @@
     </div>
   </div>
 
-  {{-- Menú móvil --}}
+  {{-- Menú mòbil --}}
   <nav class="nav-mobile">
     <ul>
       <li><a href="/">Inicio</a></li>
@@ -74,13 +72,5 @@
       <li><a href="{{ route('posts.index') }}">Blog</a></li>
       <li><a href="{{ route('casella.create') }}">La Casilla</a></li>
     </ul>
-
-    <div class="mobile-actions">
-      <div class="mobile-lang">
-        <span>Idioma:</span>
-        <a href="#">Català</a>
-        <a href="#">Castellano</a>
-      </div>
-    </div>
   </nav>
 </header>

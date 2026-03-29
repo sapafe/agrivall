@@ -13,7 +13,7 @@
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-  <link rel="stylesheet" href="{{ asset('estil.css') }}">
+  @vite(['resources/css/base.css', 'resources/css/home.css', 'resources/css/shop.css', 'resources/css/blog.css'])
 </head>
 
 <body>
@@ -34,27 +34,26 @@
       <h2 class="section-title">Nuestros Productos</h2>
 
       @if(session('success'))
-      <div style="background-color: #d4edda; color: #155724; padding: 15px; border-radius: 4px; margin-bottom: 20px;">
+      <div class="alert alert-success">
         {{ session('success') }}
-        <a href="{{ route('shop.cart') }}" style="color: #0b2e13; font-weight: bold; margin-left:10px;">Ver Carrito</a>
+        <a href="{{ route('shop.cart') }}" class="alert-link">Ver Carrito</a>
       </div>
       @endif
 
       <div class="productos-grid">
         @foreach($products as $product)
-        <div class="producto-card"
-          style="display:flex; flex-direction:column; justify-content:space-between; height:100%;">
+        <div class="producto-card">
           <div>
             @if($product->image)
             <img src="{{ asset($product->image) }}" alt="{{ $product->name }}">
             @else
-            <div style="height: 200px; background: #eee; display: flex; align-items: center; justify-content: center;">
+            <div class="no-image-placeholder">
               <span>Sin imagen</span>
             </div>
             @endif
-            <h3 style="margin-top: 15px;">{{ $product->name }} <span style="font-size:16px; color:#666;">({{
+            <h3 class="product-title">{{ $product->name }} <span class="product-variety">({{
                 $product->variety }})</span></h3>
-            <p style="color:#555; font-size:14px; margin-bottom: 10px;">Formato: {{ $product->format }}</p>
+            <p class="product-format">Formato: {{ $product->format }}</p>
           </div>
 
           <div>
@@ -62,13 +61,13 @@
             <form action="{{ route('shop.cart.add') }}" method="POST">
               @csrf
               <input type="hidden" name="product_id" value="{{ $product->id }}">
-              <button type="submit" class="btn-secondary" style="width:100%;">Añadir al carrito</button>
+              <button type="submit" class="btn-secondary full-width">Añadir al carrito</button>
             </form>
           </div>
         </div>
         @endforeach
       </div>
-      <div style="text-align: center; margin-top: 2rem;">
+      <div class="center-content margin-top-2">
         <a href="{{ route('shop.index') }}" class="btn-primary">Ver todos los productos</a>
       </div>
     </div>

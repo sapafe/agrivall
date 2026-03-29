@@ -3,55 +3,68 @@
 @section('title', 'Gestión de Pedidos')
 
 @section('content')
-<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
-    <h1>Pedidos Recibidos</h1>
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h1 class="h2">Pedidos Recibidos</h1>
 </div>
 
-<table class="admin-table">
-    <thead>
-        <tr>
-            <th>ID Pedido</th>
-            <th>Fecha</th>
-            <th>Cliente</th>
-            <th>Método de Pago</th>
-            <th>Total</th>
-            <th>Estado</th>
-            <th>Acciones</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach($orders as $order)
-        <tr>
-            <td>#{{ str_pad($order->id, 5, '0', STR_PAD_LEFT) }}</td>
-            <td>{{ $order->created_at->format('d/m/Y H:i') }}</td>
-            <td>
-                {{ $order->customer_name }}<br>
-                <small style="color:#666;">{{ $order->customer_email }}</small>
-            </td>
-            <td>{{ $order->payment_method }}</td>
-            <td>{{ number_format($order->total, 2) }} €</td>
-            <td>
-                <span style="padding: 4px 8px; border-radius: 4px; font-size: 14px; 
-                            @if($order->status == 'INICIADO') background: #cce5ff; color: #004085;
-                            @elseif($order->status == 'EN PROCESO') background: #fff3cd; color: #856404;
-                            @elseif($order->status == 'REPARTO') background: #d4edda; color: #155724;
-                            @elseif($order->status == 'FINALIZADO') background: #e2e3e5; color: #383d41;
-                            @else background: #f8f9fa; color: #333; @endif
-                        ">
-                    {{ $order->status }}
-                </span>
-            </td>
-            <td>
-                <a href="{{ route('admin.orders.show', $order) }}" class="btn-primary"
-                    style="padding: 5px 10px; font-size: 14px; text-decoration: none;">Ver Detalles</a>
-            </td>
-        </tr>
-        @endforeach
-        @if($orders->isEmpty())
-        <tr>
-            <td colspan="7" style="text-align: center; padding: 20px;">No hay pedidos registrados.</td>
-        </tr>
-        @endif
-    </tbody>
-</table>
+<div class="card shadow-sm">
+    <div class="card-body p-0">
+        <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0">
+                <thead class="table-light">
+                    <tr>
+                        <th class="ps-4">ID Pedido</th>
+                        <th>Fecha</th>
+                        <th>Cliente</th>
+                        <th>Pago</th>
+                        <th>Total</th>
+                        <th>Estado</th>
+                        <th class="pe-4 text-end">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($orders as $order)
+                    <tr>
+                        <td class="ps-4">
+                            <span class="text-primary fw-bold">#{{ str_pad($order->id, 5, '0', STR_PAD_LEFT) }}</span>
+                        </td>
+                        <td>{{ $order->created_at->format('d/m/Y H:i') }}</td>
+                        <td>
+                            <div class="fw-bold">{{ $order->customer_name }}</div>
+                            <small class="text-muted">{{ $order->customer_email }}</small>
+                        </td>
+                        <td><small class="text-uppercase fw-semibold">{{ $order->payment_method }}</small></td>
+                        <td class="fw-bold">{{ number_format($order->total, 2) }} €</td>
+                        <td>
+                            @php
+                                $statusClass = match($order->status) {
+                                    'INICIADO' => 'bg-info-subtle text-info border border-info-subtle',
+                                    'EN PROCESO' => 'bg-warning-subtle text-warning-emphasis border border-warning-subtle',
+                                    'REPARTO' => 'bg-primary-subtle text-primary border border-primary-subtle',
+                                    'FINALIZADO' => 'bg-success-subtle text-success border border-success-subtle',
+                                    default => 'bg-light text-dark border'
+                                };
+                            @endphp
+                            <span class="badge {{ $statusClass }} rounded-pill px-3">{{ $order->status }}</span>
+                        </td>
+                        <td class="pe-4 text-end">
+                            <a href="{{ route('admin.orders.show', $order) }}" class="btn btn-sm btn-outline-primary">
+                                <i class="fa-solid fa-eye me-1"></i>Detalles
+                            </a>
+                        </td>
+                    </tr>
+                    @endforeach
+                    @if($orders->isEmpty())
+                    <tr>
+                        <td colspan="7" class="text-center py-5 text-muted">
+                            <i class="fa-solid fa-receipt d-block mb-2 fs-3"></i>
+                            No hay pedidos registrados.
+                        </td>
+                    </tr>
+                    @endif
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
 @endsection

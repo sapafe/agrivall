@@ -1,0 +1,35 @@
+/* HERO */
+.hero {
+  background: url('/images/hero.jpg') center/cover no-repeat;
+  color: black;
+  text-align: center;
+  padding: 3rem 1rem;
+}
+
+.hero h1 {
+  font-family: 'Mistake Note', cursive;
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.hero p {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+}
+
+/* IMAGE SECTIONS (Home) */
+.reserva-section img {
+  width: 100%;
+  max-width: 600px;
+  height: auto;
+  display: block;
+  margin: 0 auto 2rem auto;
+  border-radius: 10px;
+}
+
+/* MOBILE PRODUCT LIMIT (Landing only) */
+@media (max-width: 767px) {
+  #productos .productos-grid .producto-card:nth-child(n+2) {
+    display: none;
+  }
+}
