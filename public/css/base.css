@@ -1,7 +1,7 @@
 /* =========================
    DESIGN SYSTEM
    ========================= */
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Mistake+Note&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lora:wght@400;700&display=swap');
 
 :root {
   /* Colors */
@@ -28,21 +28,22 @@
 }
 
 body {
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Lora', serif;
   color: var(--color-text);
   line-height: 1.6;
   background-color: var(--bg-main);
 }
 
 h1, h2, h3, h4, .section-title {
-  font-family: 'Roboto', sans-serif; /* Back to original font */
+  font-family: 'Lora', serif;
   font-weight: 700;
   color: var(--color-text);
+  line-height: 1.2;
 }
 
 .section-title {
-  font-family: 'Mistake Note', cursive !important;
-  font-weight: normal;
+  font-family: 'Lora', serif;
+  font-weight: 700;
 }
 
 /* CONTAINER */
@@ -53,12 +54,12 @@ h1, h2, h3, h4, .section-title {
 }
 
 /* =========================
-   HEADER (3 columnas)
+   HEADER (3 columnas Minimal)
    ========================= */
 .site-header {
-  background-color: var(--bg-white);
+  background-color: var(--bg-main); /* Match reference image background */
   color: var(--color-text);
-  border-bottom: 2px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
   position: sticky;
   top: 0;
   z-index: 1000;
@@ -69,44 +70,57 @@ h1, h2, h3, h4, .section-title {
   grid-template-columns: 1fr auto 1fr;
   align-items: center;
   gap: 1rem;
-  padding: 1rem 0; /* Restored padding */
+  padding: 0.7rem 0;
+}
+
+.header-left {
+  display: flex;
+  justify-content: flex-start;
 }
 
 .hamburger {
-  display: none;
-  color: var(--color-text);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 6px;
+  width: 30px;
+  height: 30px;
   cursor: pointer;
-  border: 0;
   background: transparent;
-  padding: 0.45rem 0.55rem;
-  border-radius: 8px;
-  font-size: 1.25rem;
+  border: 0;
+  padding: 0;
 }
 
-.nav-desktop a {
-  color: var(--color-text);
-  text-decoration: none;
-  font-weight: 700;
-  font-size: 1rem;
-  transition: color 0.3s;
+.hamburger .line {
+  display: block;
+  width: 24px;
+  height: 1.5px;
+  background-color: var(--color-text);
+  transition: all 0.3s ease;
 }
 
-.nav-desktop a:hover {
-  color: var(--color-primary);
-  text-decoration: underline;
+.nav-desktop {
+  display: none !important; /* Always hidden in favor of minimalist look */
 }
 
 .site-header .logo img {
-  height: 52px;
+  height: 48px;
   width: auto;
   display: block;
-  border-radius: 10px;
+  mix-blend-mode: multiply; /* Removes white background from image */
+}
+
+.header-actions {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .icon-btn {
   background: none;
   border: none;
-  font-size: 1.25rem;
+  font-size: 1.35rem; /* Slightly larger, minimalist */
   color: var(--color-text);
   cursor: pointer;
   position: relative;
@@ -114,30 +128,29 @@ h1, h2, h3, h4, .section-title {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 0.45rem 0.55rem;
+  padding: 0.5rem;
   border-radius: 8px;
   text-decoration: none;
 }
 
 .icon-btn:hover {
-  background: rgba(42, 127, 42, 0.08);
   color: var(--color-primary);
 }
 
 .cart-badge {
-  background: #d94c4c;
+  background: var(--color-primary);
   color: white;
   border-radius: 50%;
   padding: 2px 6px;
-  font-size: 11px;
+  font-size: 10px;
   position: absolute;
-  top: -5px;
-  right: -10px;
+  top: 4px;
+  right: 0px;
   font-weight: bold;
 }
 
 .admin-gauge-btn {
-  color: #18bc9c !important;
+  color: var(--color-primary) !important;
 }
 
 .logout-form {
@@ -181,33 +194,115 @@ h1, h2, h3, h4, .section-title {
   display: block;
 }
 
-/* MOBILE NAV */
-.nav-mobile {
+/* SIDEBAR MENU & OVERLAY */
+.menu-toggle {
   display: none;
-  background: #246b24;
-  border-top: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.nav-mobile {
+  position: fixed;
+  top: 0;
+  left: -100%; /* Hidden by default */
+  width: 85%;
+  max-width: 400px;
+  height: 100vh;
+  background-color: var(--bg-main);
+  z-index: 2000;
+  box-shadow: 10px 0 30px rgba(0,0,0,0.1);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  flex-direction: column;
+  padding: 2rem;
+}
+
+.sidebar-header {
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 2rem;
+}
+
+.sidebar-close {
+  font-size: 1.8rem;
+  color: var(--color-text);
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.sidebar-close:hover {
+  color: var(--color-primary);
 }
 
 .nav-mobile ul {
   list-style: none;
-  padding: 0.75rem 0;
+  padding: 0;
   margin: 0;
+}
+
+.nav-mobile li {
+  margin-bottom: 1.5rem;
 }
 
 .nav-mobile a {
   display: block;
-  color: white;
+  color: var(--color-text);
   text-decoration: none;
-  padding: 0.8rem 5%;
+  font-family: 'Lora', serif;
+  font-size: 1.8rem; /* Large, bold serif as in image */
   font-weight: 700;
+  line-height: 1.1;
+  transition: all 0.3s ease;
 }
 
 .nav-mobile a:hover {
-  background: rgba(255, 255, 255, 0.10);
+  color: var(--color-primary);
+  padding-left: 10px;
 }
 
-.menu-toggle:checked~.nav-mobile {
-  display: block;
+.sidebar-footer {
+  margin-top: auto;
+  border-top: 1px solid var(--color-border);
+  padding-top: 2rem;
+}
+
+.btn-sidebar {
+  display: inline-block;
+  font-family: 'Lora', serif;
+  text-decoration: none;
+  color: var(--color-text-muted);
+  font-weight: bold;
+}
+
+/* Overlay logic */
+.sidebar-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 1001;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.4s ease;
+  cursor: pointer;
+}
+
+.menu-toggle:checked ~ .nav-mobile {
+  left: 0;
+}
+
+.menu-toggle:checked ~ .sidebar-overlay {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* SECTION VARIATIONS */
+.section-sage {
+  background-color: var(--bg-sage);
+}
+
+.section-cream {
+  background-color: var(--bg-main);
 }
 
 .mobile-actions {
@@ -426,16 +521,8 @@ footer ul li a:hover {
 
 /* RESPONSIVE BREAKPOINT */
 @media (max-width: 768px) {
-  .nav-desktop {
-    display: none;
-  }
-
   .header-container {
     grid-template-columns: auto 1fr auto;
-  }
-
-  .hamburger {
-    display: inline-flex;
   }
 
   .lang-menu {

@@ -137,11 +137,11 @@ class ShopController extends Controller
 
             session()->forget('cart');
 
-            // Send Email to Customer
+            // Enviar email al cliente
             Mail::to($order->customer_email)->send(new \App\Mail\OrderConfirmed($order));
 
-            // Optionally send to Admin too
-            // Mail::to(config('mail.from.address'))->send(new \App\Mail\OrderConfirmed($order));
+            // Enviar email al administrador
+            Mail::to(config('mail.from.address'))->send(new \App\Mail\OrderConfirmed($order));
 
             return redirect()->route('shop.index')->with('success', 'Pedido realizado con éxito! Te hemos enviado un correo de confirmación.');
         }

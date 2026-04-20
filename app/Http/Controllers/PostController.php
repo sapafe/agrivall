@@ -3,15 +3,23 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Models\PostType;
 
 class PostController extends Controller
 {
-    // Listado de posts
+    // Listado de posts con filtro opcional por tipo
     public function index()
     {
-        $posts = Post::orderByDesc('published_at')->paginate(6);
+        $postTypes = PostType::orderBy('name')->get();
+        $typeId    = request('type');
 
-        return view('posts.index', compact('posts'));
+        $posts = Post::with('type')
+            ->when($typeId, fn ($q) => $q->where('post_type_id', $typeId))
+            ->orderByDesc('published_at')
+            ->paginate(6)
+            ->withQueryString();
+
+        return view('posts.index', compact('posts', 'postTypes', 'typeId'));
     }
 
     // Post individual

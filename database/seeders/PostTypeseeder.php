@@ -11,11 +11,9 @@ class PostTypeSeeder extends Seeder
     public function run(): void
     {
         $types = [
-            'Noticias',
-            'Recetas',
-            'Temporada',
-            'La Casilla',
-            'Consejos',
+            'Cultivo',
+            'Ecología',
+            'Cursos',
         ];
 
         foreach ($types as $name) {

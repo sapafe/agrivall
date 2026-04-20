@@ -7,10 +7,13 @@ use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\OrderController;
+use App\Http\Controllers\Admin\PostTypeController;
+use App\Http\Controllers\Admin\PostsBlogController;
 
 Route::get('/', function () {
     $products = \App\Models\Product::where('available', true)->take(3)->get();
-    return view('home', compact('products'));
+    $posts = \App\Models\Post::latest()->take(2)->get();
+    return view('home', compact('products', 'posts'));
 });
 
 
@@ -32,12 +35,13 @@ Route::middleware('auth')->group(function () {
 
     Route::prefix('admin')->name('admin.')->group(function () {
             Route::resource('products', ProductController::class);
-            Route::get('orders', [OrderController::class , 'index'])->name('orders.index');
-            Route::get('orders/{order}', [OrderController::class , 'show'])->name('orders.show');
-            Route::put('orders/{order}/status', [OrderController::class , 'updateStatus'])->name('orders.updateStatus');
+            Route::get('orders', [OrderController::class, 'index'])->name('orders.index');
+            Route::get('orders/{order}', [OrderController::class, 'show'])->name('orders.show');
+            Route::put('orders/{order}/status', [OrderController::class, 'updateStatus'])->name('orders.updateStatus');
             Route::resource('weeks', \App\Http\Controllers\Admin\WeekController::class)->except(['create', 'store', 'destroy']);
-        }
-        );
+            Route::resource('post-types', PostTypeController::class);
+            Route::resource('posts-blog', PostsBlogController::class);
+        });
     });
 Route::get('/login', [AuthController::class , 'show'])->name('login');
 Route::post('/login', [AuthController::class , 'login'])->name('login.attempt');

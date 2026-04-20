@@ -10,9 +10,18 @@ class ReservationController extends Controller
 {
     public function create()
     {
+        $currentYear = now()->year;
+        $currentWeek = now()->weekOfYear;
+
         $weeks = Week::orderBy('year', 'asc')
             ->orderBy('week_number', 'asc')
-            ->where('year', '>=', 2026)
+            ->where(function ($query) use ($currentYear, $currentWeek) {
+                $query->where('year', '>', $currentYear)
+                      ->orWhere(function ($q) use ($currentYear, $currentWeek) {
+                          $q->where('year', $currentYear)
+                            ->where('week_number', '>=', $currentWeek);
+                      });
+            })
             ->get()
             ->groupBy(function($week) {
                 return $week->year . '-' . str_pad($week->month, 2, '0', STR_PAD_LEFT);

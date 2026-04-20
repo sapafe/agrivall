@@ -11,7 +11,8 @@
     <!-- Bootstrap para Backoffice -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    @vite(['resources/css/base.css', 'resources/css/admin.css'])
+    <link rel="stylesheet" href="{{ asset('css/base.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/admin.css') }}">
 </head>
 
 <body>
@@ -24,6 +25,8 @@
                 <a href="{{ route('admin.products.index') }}"><i class="fa-solid fa-box"></i> Productos</a>
                 <a href="{{ route('admin.orders.index') }}"><i class="fa-solid fa-shopping-cart"></i> Pedidos</a>
                 <a href="{{ route('admin.weeks.index') }}"><i class="fa-solid fa-calendar-days"></i> Semanas</a>
+                <a href="{{ route('admin.posts-blog.index') }}"><i class="fa-solid fa-newspaper"></i> Noticias</a>
+                <a href="{{ route('admin.post-types.index') }}"><i class="fa-solid fa-tags"></i> Tipos de Post</a>
             </nav>
         </aside>
 

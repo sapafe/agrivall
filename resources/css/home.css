@@ -1,13 +1,13 @@
 /* HERO */
 .hero {
-  background: url('/images/hero.jpg') center/cover no-repeat;
-  color: black;
+  background-color: var(--bg-sage); /* New color */
+  color: var(--color-text);
   text-align: center;
-  padding: 3rem 1rem;
+  padding: 3rem 1rem; /* Original padding */
 }
 
 .hero h1 {
-  font-family: 'Mistake Note', cursive;
+  font-family: 'Mistake Note', cursive !important; /* Original font */
   font-size: 3rem;
   margin-bottom: 1rem;
 }
@@ -15,19 +15,20 @@
 .hero p {
   font-size: 1.2rem;
   margin-bottom: 2rem;
+  color: var(--color-text-muted);
 }
 
-/* IMAGE SECTIONS (Home) */
+/* IMÁGENES (Home) */
 .reserva-section img {
   width: 100%;
   max-width: 600px;
   height: auto;
   display: block;
   margin: 0 auto 2rem auto;
-  border-radius: 10px;
+  border-radius: 10px; /* Original radius */
 }
 
-/* MOBILE PRODUCT LIMIT (Landing only) */
+/* LÍMITE PRODUCTOS MÓVIL (Solo Landing) */
 @media (max-width: 767px) {
   #productos .productos-grid .producto-card:nth-child(n+2) {
     display: none;

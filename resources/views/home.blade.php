@@ -7,13 +7,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>AgriVall - Productos Ecológicos y La Casilla</title>
 
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Mistake+Note&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&display=swap" rel="stylesheet">
 
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-  @vite(['resources/css/base.css', 'resources/css/home.css', 'resources/css/shop.css', 'resources/css/blog.css'])
+  <link rel="stylesheet" href="{{ asset('css/base.css?v=1.1') }}">
+  <link rel="stylesheet" href="{{ asset('css/home.css?v=1.1') }}">
+  <link rel="stylesheet" href="{{ asset('css/shop.css?v=1.1') }}">
+  <link rel="stylesheet" href="{{ asset('css/blog.css?v=1.1') }}">
 </head>
 
 <body>
@@ -21,15 +23,15 @@
 
 
   <!-- LANDING -->
-  <section id="inicio" class="hero">
+  <section id="inicio" class="hero section-cream">
     <div class="container hero-container">
-      <h1>Bienvenido a AgriVall</h1>
+      <h1 class="hero-title">Bienvenido a AgriVall</h1>
       <p>Productos ecológicos frescos y La Casilla</p>
     </div>
   </section>
 
   <!-- SECCIÓN PRODUCTOS -->
-  <section id="productos">
+  <section id="productos" class="section-sage">
     <div class="container section-container">
       <h2 class="section-title">Nuestros Productos</h2>
 
@@ -74,48 +76,51 @@
   </section>
 
   <!-- SECCIÓN RESERVA -->
-  <section id="reserva" class="reserva-section">
+  <section id="reserva" class="reserva-section section-cream">
     <div class="container section-container">
       <h2 class="section-title">Reserva La Casilla</h2>
       <img src="{{ asset('images/casella/fachada.jpg') }}" alt="AgriVall fachada">
 
-      <form action="#" class="reserva-form">
-        <label for="nombre">Nombre:</label>
-        <input type="text" id="nombre" name="nombre" required>
-
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" required>
-
-        <label for="fecha">Fecha:</label>
-        <input type="date" id="fecha" name="fecha" required>
-
-        <label for="mensaje">Mensaje:</label>
-        <textarea id="mensaje" name="mensaje" rows="4"></textarea>
-
-        <button type="submit" class="btn-primary">Reservar</button>
-      </form>
+      <div class="center-content margin-top-2">
+        <p class="intro-text">Reserva tu estancia en La Casilla seleccionando la semana que prefieras en nuestro calendario actualizado.</p>
+        <a href="{{ route('casella.create') }}" class="btn-primary">Seleccionar semana</a>
+      </div>
     </div>
   </section>
 
   <!-- SECCIÓN BLOG -->
-  <section id="blog">
+  <section id="blog" class="section-sage">
     <div class="container section-container">
       <h2 class="section-title">Blog</h2>
 
       <div class="blog-grid">
+        @foreach($posts as $post)
         <div class="blog-card">
-          <img src="{{ asset('blog1.jpg') }}" alt="Entrada 1">
-          <h3>Título de la Entrada 1</h3>
-          <p>Resumen de la entrada del blog...</p>
-          <a href="#" class="btn-secondary">Leer más</a>
-        </div>
+          {{-- Imagen o fallback corporativo --}}
+          <img src="{{ !empty($post->image) && file_exists(public_path($post->image)) ? asset($post->image) : asset('img/blog-default.png') }}" 
+               alt="{{ $post->title }}" class="blog-card__img">
 
-        <div class="blog-card">
-          <img src="{{ asset('blog2.jpg') }}" alt="Entrada 2">
-          <h3>Título de la Entrada 2</h3>
-          <p>Resumen de la entrada del blog...</p>
-          <a href="#" class="btn-secondary">Leer más</a>
+          {{-- Categoría --}}
+          @if($post->type)
+          <span class="blog-card__badge">{{ $post->type->name }}</span>
+          @endif
+
+          <div class="blog-card__body">
+            <h3 class="blog-card__title">{{ $post->title }}</h3>
+            
+            <p class="post-date">
+              <i class="fa-regular fa-calendar me-1"></i>
+              {{ $post->published_at->format('d/m/Y') }}
+            </p>
+
+            <p>{{ Str::limit($post->body, 100) }}</p>
+            <a href="{{ route('posts.show', $post->id) }}" class="btn-secondary blog-card__btn">Leer más</a>
+          </div>
         </div>
+        @endforeach
+      </div>
+      <div class="center-content margin-top-2">
+        <a href="{{ route('posts.index') }}" class="btn-primary">Ver todas las noticias</a>
       </div>
     </div>
   </section>
