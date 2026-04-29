@@ -22,26 +22,26 @@
 
       {{-- Login / Logout --}}
       @auth
-      <a href="{{ route('admin.orders.index') }}" class="icon-btn admin-gauge-btn" aria-label="Panel Admin">
-        <i class="fa-solid fa-gauge-high"></i>
-      </a>
-      <form method="POST" action="{{ route('logout') }}" class="logout-form">
-        @csrf
-        <button class="icon-btn" type="submit" aria-label="Cerrar sesión">
-          <i class="fa-solid fa-arrow-right-from-bracket"></i>
-        </button>
-      </form>
+        <a href="{{ route('admin.orders.index') }}" class="icon-btn admin-gauge-btn" aria-label="Panel Admin">
+          <i class="fa-solid fa-gauge-high"></i>
+        </a>
+        <form method="POST" action="{{ route('logout') }}" class="logout-form">
+          @csrf
+          <button class="icon-btn" type="submit" aria-label="Cerrar sesión">
+            <i class="fa-solid fa-arrow-right-from-bracket"></i>
+          </button>
+        </form>
       @else
-      <a class="icon-btn" href="{{ route('login') }}" aria-label="Login">
-        <i class="fa-regular fa-user"></i>
-      </a>
+        <a class="icon-btn" href="{{ route('login') }}" aria-label="Login">
+          <i class="fa-regular fa-user"></i>
+        </a>
       @endauth
 
       {{-- Carrito --}}
       <a href="{{ route('shop.cart') }}" class="icon-btn" aria-label="Carrito">
         <i class="fa-solid fa-bag-shopping"></i>
         <span class="badge cart-badge">{{
-          session()->has('cart') ? collect(session('cart'))->sum('quantity') : 0 }}</span>
+  session()->has('cart') ? collect(session('cart'))->sum('quantity') : 0 }}</span>
       </a>
 
       {{-- Idioma --}}
@@ -66,9 +66,10 @@
     </div>
     <ul>
       <li><a href="/">Inicio</a></li>
+      <li><a href="{{ route('about') }}">Sobre nosotros</a></li>
       <li><a href="{{ route('shop.index') }}">Tienda</a></li>
       <li><a href="{{ route('posts.index') }}">Blog</a></li>
-      <li><a href="{{ route('casella.create') }}">La Casilla</a></li>
+      <li><a href="{{ route('casella.create') }}">Reserva de la casilla</a></li>
     </ul>
   </nav>
 

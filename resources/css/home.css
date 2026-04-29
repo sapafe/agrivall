@@ -1,13 +1,16 @@
 /* HERO */
 .hero {
-  background-color: var(--bg-sage); /* New color */
+  background-color: var(--bg-sage);
+  /* New color */
   color: var(--color-text);
   text-align: center;
-  padding: 3rem 1rem; /* Original padding */
+  padding: 3rem 1rem;
+  /* Original padding */
 }
 
 .hero h1 {
-  font-family: 'Mistake Note', cursive !important; /* Original font */
+  font-family: 'Mistake Note', cursive !important;
+  /* Original font */
   font-size: 3rem;
   margin-bottom: 1rem;
 }
@@ -21,16 +24,30 @@
 /* IMÁGENES (Home) */
 .reserva-section img {
   width: 100%;
-  max-width: 600px;
+  max-width: 450px;
   height: auto;
   display: block;
   margin: 0 auto 2rem auto;
-  border-radius: 10px; /* Original radius */
+  border-radius: 10px;
 }
 
-/* LÍMITE PRODUCTOS MÓVIL (Solo Landing) */
+/* DESKTOP LAYOUT */
+@media (min-width: 992px) {
+  #productos .productos-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  #blog .blog-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* LLÍMITS MÒBIL (landing) */
 @media (max-width: 767px) {
-  #productos .productos-grid .producto-card:nth-child(n+2) {
+  #productos .productos-grid .producto-card:nth-child(n+3) {
+    display: none;
+  }
+  #blog .blog-grid .blog-card:nth-child(n+2) {
     display: none;
   }
 }

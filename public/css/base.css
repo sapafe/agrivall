@@ -100,14 +100,14 @@ h1, h2, h3, h4, .section-title {
 }
 
 .nav-desktop {
-  display: none !important; /* Always hidden in favor of minimalist look */
+  display: none !important; 
 }
 
 .site-header .logo img {
   height: 48px;
   width: auto;
   display: block;
-  mix-blend-mode: multiply; /* Removes white background from image */
+  mix-blend-mode: multiply; 
 }
 
 .header-actions {
@@ -120,7 +120,7 @@ h1, h2, h3, h4, .section-title {
 .icon-btn {
   background: none;
   border: none;
-  font-size: 1.35rem; /* Slightly larger, minimalist */
+  font-size: 1.35rem; 
   color: var(--color-text);
   cursor: pointer;
   position: relative;
@@ -202,7 +202,7 @@ h1, h2, h3, h4, .section-title {
 .nav-mobile {
   position: fixed;
   top: 0;
-  left: -100%; /* Hidden by default */
+  left: -100%; 
   width: 85%;
   max-width: 400px;
   height: 100vh;
@@ -247,7 +247,7 @@ h1, h2, h3, h4, .section-title {
   color: var(--color-text);
   text-decoration: none;
   font-family: 'Lora', serif;
-  font-size: 1.8rem; /* Large, bold serif as in image */
+  font-size: 1.8rem; 
   font-weight: 700;
   line-height: 1.1;
   transition: all 0.3s ease;
@@ -331,7 +331,7 @@ h1, h2, h3, h4, .section-title {
   padding: 0.8rem 1.5rem;
   border: none;
   cursor: pointer;
-  border-radius: 5px; /* Back to original */
+  border-radius: 5px; 
   text-decoration: none;
   display: inline-block;
   transition: background 0.3s;
@@ -348,7 +348,7 @@ h1, h2, h3, h4, .section-title {
   padding: 0.6rem 1.2rem;
   border: none;
   cursor: pointer;
-  border-radius: 5px; /* Back to original */
+  border-radius: 5px; 
   text-decoration: none;
   display: inline-block;
   transition: background 0.3s;

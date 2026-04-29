@@ -20,7 +20,7 @@
 
 
   <main class="container section-container casella-main">
-    <h1 class="section-title">La Casilla</h1>
+    <h1 class="section-title">Reserva de la casilla</h1>
 
     @if(session('ok'))
     <div class="alert alert-success">
@@ -30,20 +30,8 @@
 
     <section class="casella-intro">
       <p class="center-content intro-text">
-        Un espacio para desconectar, respirar naturaleza y disfrutar de productos de temporada.
-        Reserva una semana y te contactaremos para confirmar disponibilidad.
+        Selecciona la semana que prefieras en nuestro calendario para solicitar tu reserva.
       </p>
-
-      <div class="casella-gallery">
-        <img src="{{ asset('images/casella/fachada.jpg') }}" alt="Fachada La Casilla">
-        <img src="{{ asset('images/casella/cuina.jpg') }}" alt="Interior La Casilla">
-        <img src="{{ asset('images/casella/habitacio1.jpg') }}" alt="Interior La Casilla">
-        <img src="{{ asset('images/casella/habitacio2.jpg') }}" alt="Interior La Casilla">
-        <img src="{{ asset('images/casella/habitacio3.jpg') }}" alt="Interior La Casilla">
-        <img src="{{ asset('images/casella/menjador.jpg') }}" alt="Interior La Casilla">
-        <img src="{{ asset('images/casella/riu.jpg') }}" alt="Entorno La Casilla">
-      </div>
-      <p style="opacity:.8; text-align:center; margin-top:.75rem;"></p>
     </section>
 
     <section class="casella-reserva">

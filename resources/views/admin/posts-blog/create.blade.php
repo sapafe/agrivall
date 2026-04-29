@@ -66,7 +66,7 @@
                                id="image" name="image" accept="image/*">
                         <div class="form-text">
                             <i class="fa-solid fa-circle-info me-1"></i>
-                            Si no se añade imagen, se mostrará una imagen de relleno en la página pública.
+                            Si no se añade imagen, se mostrará una imagen po defecto.
                             Formatos: JPG, PNG, WebP. Máx. 3 MB.
                         </div>
                         @error('image')
@@ -84,7 +84,7 @@
                     <div class="alert alert-light border mb-4 py-2 px-3 d-flex align-items-center gap-2">
                         <i class="fa-regular fa-calendar text-muted"></i>
                         <span class="small text-muted">
-                            La fecha de publicación se asignará automáticamente al día de hoy:
+                            La fecha de publicación se asignará automáticamente al día de actual:
                             <strong>{{ now()->format('d/m/Y') }}</strong>
                         </span>
                     </div>

@@ -253,7 +253,7 @@
 
 @media (max-width: 576px) {
   .agrivall-pag-numbers {
-    display: none; /* Simplifica en móvil ocultando números */
+    display: none;
   }
 }
 

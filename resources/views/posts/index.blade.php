@@ -39,7 +39,7 @@
     @if($posts->isEmpty())
     <div class="blog-empty">
         <i class="fa-solid fa-newspaper"></i>
-        <p>No hay noticias en esta categoría.</p>
+        <p>No hay posts en esta categoría.</p>
     </div>
     @else
     <div class="blog-grid">
