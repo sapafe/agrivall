@@ -83,6 +83,7 @@
 }
 
 .blog-card__title {
+  font-family: 'Roboto', sans-serif;
   font-size: 1.25rem;
   font-weight: 700;
   margin: 1rem;
@@ -218,7 +219,7 @@
 }
 
 .agrivall-pag-numbers {
-  display: flex;
+  display: none; /* Oculto en móvil */
   gap: 0.5rem;
   align-items: center;
 }
@@ -251,14 +252,15 @@
   color: #ccc;
 }
 
-@media (max-width: 576px) {
+/* RESPONSIVE — tablet & desktop */
+@media (min-width: 576px) {
   .agrivall-pag-numbers {
-    display: none;
+    display: flex; /* Muestra números en pantallas grandes */
   }
 }
 
 /* ================================
-   POST DETAIL
+   POST DETALL
    ================================ */
 .post-detail {
   max-width: 820px;

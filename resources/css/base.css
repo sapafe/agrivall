@@ -1,7 +1,7 @@
 /* =========================
    DESIGN SYSTEM
    ========================= */
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Mistake+Note&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Lora:wght@400;700&display=swap');
 
 :root {
   /* Colors */
@@ -41,8 +41,8 @@ h1, h2, h3, h4, .section-title {
 }
 
 .section-title {
-  font-family: 'Mistake Note', cursive !important;
-  font-weight: normal;
+  font-family: 'Lora', serif !important;
+  font-weight: 700;
 }
 
 /* CONTAINER */
@@ -53,34 +53,83 @@ h1, h2, h3, h4, .section-title {
 }
 
 /* =========================
+   SECTION COLORS
+   ========================= */
+.section-cream {
+  background-color: var(--bg-main);
+}
+
+.section-sage {
+  background-color: var(--bg-sage);
+}
+
+/* =========================
    HEADER (3 columnas)
    ========================= */
 .site-header {
-  background-color: var(--bg-white);
+  background-color: var(--bg-main);
   color: var(--color-text);
-  border-bottom: 2px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
   position: sticky;
   top: 0;
   z-index: 1000;
 }
 
-.header-container {
-  display: grid;
-  grid-template-columns: 1fr auto 1fr;
-  align-items: center;
-  gap: 1rem;
-  padding: 1rem 0; /* Restored padding */
+.menu-toggle {
+  display: none;
 }
 
+/* Mobile-first: layout de 3 columnas bien distribuidas */
+.header-container {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr; /* Cambiado a 1fr auto 1fr para forzar distribución */
+  align-items: center;
+  gap: 1rem;
+  padding: 0.8rem 0;
+}
+
+.header-left {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.logo {
+  display: flex;
+  justify-content: center;
+}
+
+.header-actions {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Mobile: hamburger visible por defecto */
 .hamburger {
-  display: none;
-  color: var(--color-text);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 6px;
+  width: 30px;
+  height: 30px;
   cursor: pointer;
-  border: 0;
   background: transparent;
-  padding: 0.45rem 0.55rem;
-  border-radius: 8px;
-  font-size: 1.25rem;
+  border: none;
+  padding: 0;
+}
+
+.hamburger .line {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background-color: var(--color-text);
+  transition: all 0.3s ease;
+}
+
+/* Mobile: nav desktop oculto */
+.nav-desktop {
+  display: none;
 }
 
 .nav-desktop a {
@@ -96,11 +145,12 @@ h1, h2, h3, h4, .section-title {
   text-decoration: underline;
 }
 
+/* Mobile: logo más grande y sin fondo blanco */
 .site-header .logo img {
-  height: 52px;
+  height: 60px;
   width: auto;
   display: block;
-  border-radius: 10px;
+  mix-blend-mode: multiply; /* Elimina el fondo blanco de la imagen */
 }
 
 .icon-btn {
@@ -144,6 +194,10 @@ h1, h2, h3, h4, .section-title {
   margin: 0;
   display: flex;
   align-items: center;
+}
+
+.icon-btn i {
+  font-size: 1.2rem;
 }
 
 /* Idiomas */
@@ -424,21 +478,32 @@ footer ul li a:hover {
   width: auto;
 }
 
-/* RESPONSIVE BREAKPOINT */
-@media (max-width: 768px) {
+/* BREAKPOINT TABLET / DESKTOP (min-width: 768px) */
+@media (min-width: 768px) {
+  /* Header: layout de 3 columnas en tablet/desktop */
+  .header-container {
+    grid-template-columns: 1fr auto 1fr;
+  }
+
+  /* Mantener hamburguesa visible y ocultar nav desktop según diseño de referencia */
   .nav-desktop {
     display: none;
   }
 
-  .header-container {
-    grid-template-columns: auto 1fr auto;
-  }
-
   .hamburger {
-    display: inline-flex;
+    display: flex;
   }
 
-  .lang-menu {
-    display: none !important;
+  /* Logo más grande en tablet/desktop */
+  .site-header .logo img {
+    height: 90px;
+  }
+
+  .icon-btn i {
+    font-size: 1.4rem;
+  }
+
+  .header-actions {
+    gap: 1rem;
   }
 }

@@ -10,7 +10,7 @@ class UserSeeder extends Seeder
 {
     public function run(): void
     {
-        // Usuario principal (para ti)
+        // Usuario principal (admin)
         User::updateOrCreate(
             ['email' => 'admin@agrivall.test'],
             [
@@ -20,5 +20,14 @@ class UserSeeder extends Seeder
             ]
         );
 
+        // Usuario de prueba (no admin)
+        User::updateOrCreate(
+            ['email' => 'usuario@agrivall.test'],
+            [
+                'name' => 'Usuario Test',
+                'password' => Hash::make('password'),
+                'email_verified_at' => now(),
+            ]
+        );
     }
 }

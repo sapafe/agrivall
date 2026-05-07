@@ -1,27 +1,29 @@
-/* HERO */
+/* =============================
+   HOME — Mobile First
+   ============================= */
+
+/* HERO (Bienvenido a AgriVall) — fondo cream */
 .hero {
-  background-color: var(--bg-sage);
-  /* New color */
+  background-color: var(--bg-main); /* beige/cream */
   color: var(--color-text);
   text-align: center;
   padding: 3rem 1rem;
-  /* Original padding */
 }
 
 .hero h1 {
-  font-family: 'Mistake Note', cursive !important;
-  /* Original font */
-  font-size: 3rem;
+  font-family: 'Lora', serif !important;
+  font-size: 2.8rem;
+  font-weight: 700;
   margin-bottom: 1rem;
 }
 
 .hero p {
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   margin-bottom: 2rem;
   color: var(--color-text-muted);
 }
 
-/* IMÁGENES (Home) */
+/* IMAGEN sección reserva */
 .reserva-section img {
   width: 100%;
   max-width: 450px;
@@ -31,7 +33,57 @@
   border-radius: 10px;
 }
 
-/* DESKTOP LAYOUT */
+/* GRIDS: 1 columna en móvil por defecto */
+.productos-grid,
+.blog-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+/* En móvil: ocultar tarjetas extra */
+#productos .productos-grid .producto-card:nth-child(n+3) {
+  display: none;
+}
+
+#blog .blog-grid .blog-card:nth-child(n+2) {
+  display: none;
+}
+
+/* ===========================
+   TABLET / DESKTOP (≥768px)
+   =========================== */
+@media (min-width: 768px) {
+  .hero h1 {
+    font-size: 3rem;
+  }
+
+  .hero p {
+    font-size: 1.2rem;
+  }
+
+  /* Mostrar todas las tarjetas en tablet+ */
+  #productos .productos-grid .producto-card:nth-child(n+3) {
+    display: flex;
+  }
+
+  #blog .blog-grid .blog-card:nth-child(n+2) {
+    display: flex;
+  }
+
+  /* 2 columnas en tablet */
+  #productos .productos-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  #blog .blog-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* ===========================
+   DESKTOP (≥992px)
+   =========================== */
 @media (min-width: 992px) {
   #productos .productos-grid {
     grid-template-columns: repeat(4, 1fr);
@@ -39,15 +91,5 @@
 
   #blog .blog-grid {
     grid-template-columns: repeat(3, 1fr);
-  }
-}
-
-/* LLÍMITS MÒBIL (landing) */
-@media (max-width: 767px) {
-  #productos .productos-grid .producto-card:nth-child(n+3) {
-    display: none;
-  }
-  #blog .blog-grid .blog-card:nth-child(n+2) {
-    display: none;
   }
 }

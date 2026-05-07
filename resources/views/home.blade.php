@@ -12,7 +12,7 @@
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-  <link rel="stylesheet" href="{{ asset('css/base.css?v=1.1') }}">
+  <link rel="stylesheet" href="{{ asset('css/base.css?v=1.2') }}">
   <link rel="stylesheet" href="{{ asset('css/home.css?v=1.1') }}">
   <link rel="stylesheet" href="{{ asset('css/shop.css?v=1.1') }}">
   <link rel="stylesheet" href="{{ asset('css/blog.css?v=1.1') }}">
@@ -124,7 +124,7 @@
   </section>
 
   <!-- SECCIÓN CONTACTO -->
-  <section id="contacto">
+  <section id="contacto" class="section-cream">
     <div class="container section-container">
       <h2 class="section-title">Contacto</h2>
 

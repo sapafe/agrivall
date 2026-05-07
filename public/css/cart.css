@@ -126,7 +126,7 @@
 }
 
 .hide-mobile {
-  display: table-cell;
+  display: none;
 }
 
 /* Quitar flechas de los inputs de número */
@@ -140,10 +140,11 @@ input[type=number] {
   -moz-appearance: textfield;
 }
 
-@media (max-width: 768px) {
+/* RESPONSIVE — tablet & desktop */
+@media (min-width: 768px) {
   .cart-table th:nth-child(2),
   .cart-table td:nth-child(2),
   .hide-mobile {
-    display: none !important;
+    display: table-cell !important;
   }
 }
