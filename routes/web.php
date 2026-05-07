@@ -35,7 +35,7 @@ Route::post('/checkout', [ShopController::class, 'processCheckout'])->name('shop
 Route::middleware('auth')->group(function () {
     Route::post('/la-casella/reservar', [ReservationController::class, 'store'])->name('casella.store');
 
-    Route::prefix('admin')->name('admin.')->group(function () {
+    Route::middleware('admin')->prefix('admin')->name('admin.')->group(function () {
         Route::resource('products', ProductController::class);
         Route::get('orders', [OrderController::class, 'index'])->name('orders.index');
         Route::get('orders/{order}', [OrderController::class, 'show'])->name('orders.show');

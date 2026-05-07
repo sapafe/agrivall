@@ -17,6 +17,7 @@ class UserSeeder extends Seeder
                 'name' => 'AgriVall Admin',
                 'password' => Hash::make('password'),
                 'email_verified_at' => now(),
+                'is_admin' => true,
             ]
         );
 
@@ -27,6 +28,7 @@ class UserSeeder extends Seeder
                 'name' => 'Usuario Test',
                 'password' => Hash::make('password'),
                 'email_verified_at' => now(),
+                'is_admin' => false,
             ]
         );
     }
