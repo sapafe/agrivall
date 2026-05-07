@@ -22,9 +22,11 @@
 
       {{-- Login / Logout --}}
       @auth
-        <a href="{{ route('admin.orders.index') }}" class="icon-btn admin-gauge-btn" aria-label="Panel Admin">
-          <i class="fa-solid fa-gauge-high"></i>
-        </a>
+        @if(auth()->user()->is_admin)
+          <a href="{{ route('admin.orders.index') }}" class="icon-btn admin-gauge-btn" aria-label="Panel Admin">
+            <i class="fa-solid fa-gauge-high"></i>
+          </a>
+        @endif
         <form method="POST" action="{{ route('logout') }}" class="logout-form">
           @csrf
           <button class="icon-btn" type="submit" aria-label="Cerrar sesión">
