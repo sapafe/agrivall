@@ -1,26 +1,33 @@
 /* ADMIN LAYOUT & SIDEBAR */
 .admin-layout {
   display: flex;
+  flex-direction: column;
   min-height: 100vh;
 }
 
 .admin-sidebar {
-  width: 260px;
+  width: 100%;
   background: #2c3e50;
   color: white;
-  padding: 20px;
+  padding: 15px;
   flex-shrink: 0;
-  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   z-index: 100;
 }
 
 .admin-sidebar h2 {
   color: white;
-  margin-bottom: 30px;
+  margin-bottom: 15px;
   font-size: 1.25rem;
   font-weight: bold;
   text-transform: uppercase;
   letter-spacing: 1px;
+}
+
+.admin-sidebar nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
 }
 
 .admin-sidebar nav a {
@@ -28,14 +35,13 @@
   display: flex;
   align-items: center;
   gap: 12px;
-  padding: 12px 15px;
+  padding: 8px 12px;
   text-decoration: none;
   border-radius: 6px;
   transition: all 0.3s;
-  margin-bottom: 8px;
 }
 
-.admin-sidebar nav a:hover, 
+.admin-sidebar nav a:hover,
 .admin-sidebar nav a.active {
   background: #34495e;
   color: #18bc9c;
@@ -50,29 +56,31 @@
   flex: 1;
   padding: 40px;
   background: #f8f9fa;
-  min-width: 0; 
+  min-width: 0;
 }
 
-/* ADMIN RESPONSIVE */
-@media (max-width: 768px) {
+/* ADMIN ESCRIPTORI */
+@media (min-width: 768px) {
   .admin-layout {
-    flex-direction: column;
+    flex-direction: row;
   }
+
   .admin-sidebar {
-    width: 100%;
-    padding: 15px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    width: 260px;
+    padding: 20px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
   }
+
   .admin-sidebar h2 {
-    margin-bottom: 15px;
+    margin-bottom: 30px;
   }
+
   .admin-sidebar nav {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
+    display: block;
   }
+
   .admin-sidebar nav a {
-    margin-bottom: 0;
-    padding: 8px 12px;
+    padding: 12px 15px;
+    margin-bottom: 8px;
   }
 }

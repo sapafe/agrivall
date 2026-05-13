@@ -4,12 +4,6 @@
   gap: 2rem;
 }
 
-@media (min-width: 768px) {
-  .productos-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
 .producto-card {
   background-color: var(--bg-white);
   padding: 1rem;
@@ -74,4 +68,13 @@
   border-radius: 12px;
   color: var(--color-primary);
   font-size: 2.5rem;
+}
+
+/* ================================
+   ESCRIPTORI
+   ================================ */
+@media (min-width: 768px) {
+  .productos-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }

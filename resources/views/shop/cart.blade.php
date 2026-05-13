@@ -84,18 +84,18 @@
                 <div class="totals-container">
                     <div class="totals-row">
                         <span>Subtotal:</span>
-                        <strong id="subtotal">0,00 €</strong>
+                        <strong id="subtotal">{{ number_format($subtotal, 2, ',', '.') }} €</strong>
                     </div>
                     <div class="totals-row">
                         <span>IVA (21%):</span>
-                        <strong id="iva">0,00 €</strong>
+                        <strong id="iva">{{ number_format($iva, 2, ',', '.') }} €</strong>
                     </div>
                     <div class="totals-row">
                         <span>Descuento:</span>
                         <strong id="discount">0,00 €</strong>
                     </div>
                     <div class="total-final">
-                        Total: <span id="total-final">0,00 €</span>
+                        Total: <span id="total-final">{{ number_format($total, 2, ',', '.') }} €</span>
                     </div>
 
                     <div class="cart-actions-bottom">

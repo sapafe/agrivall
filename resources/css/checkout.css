@@ -1,14 +1,8 @@
 /* LAYOUT CHECKOUT */
 .checkout-grid {
   display: grid;
-  grid-template-columns: 2fr 1fr;
+  grid-template-columns: 1fr;
   gap: 30px;
-}
-
-@media (max-width: 900px) {
-  .checkout-grid {
-    grid-template-columns: 1fr;
-  }
 }
 
 .checkout-box {
@@ -28,15 +22,9 @@
 /* AYUDAS FORMULARIO */
 .form-row {
   display: flex;
-  gap: 20px;
+  flex-direction: column;
+  gap: 0;
   margin-bottom: 15px;
-}
-
-@media (max-width: 600px) {
-  .form-row {
-    flex-direction: column;
-    gap: 0;
-  }
 }
 
 .form-group {
@@ -62,14 +50,9 @@
 /* MÉTODOS DE PAGO */
 .payment-methods {
   display: flex;
+  flex-direction: column;
   gap: 20px;
   margin-bottom: 30px;
-}
-
-@media (max-width: 600px) {
-  .payment-methods {
-    flex-direction: column;
-  }
 }
 
 .payment-option {
@@ -130,4 +113,18 @@
   font-weight: bold;
   margin-top: 20px;
   color: #2c3e50;
+}
+
+/* ================================
+   TABLET / DESKTOP
+   ================================ */
+@media (min-width: 768px) {
+  .form-row {
+    flex-direction: row;
+    gap: 20px;
+  }
+
+  .payment-methods {
+    flex-direction: row;
+  }
 }

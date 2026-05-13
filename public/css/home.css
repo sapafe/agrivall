@@ -33,11 +33,11 @@
   border-radius: 10px;
 }
 
-/* GRIDS: 1 columna en móvil por defecto */
+/* GRIDS: 2 columnas en móvil por defecto */
 .productos-grid,
 .blog-grid {
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: 1fr 1fr;
   gap: 1.5rem;
 }
 
@@ -46,12 +46,12 @@
   display: none;
 }
 
-#blog .blog-grid .blog-card:nth-child(n+2) {
+#blog .blog-grid .blog-card:nth-child(n+3) {
   display: none;
 }
 
 /* ===========================
-   TABLET / DESKTOP (≥768px)
+   TABLET / ESCRIPTORI
    =========================== */
 @media (min-width: 768px) {
   .hero h1 {
@@ -67,7 +67,7 @@
     display: flex;
   }
 
-  #blog .blog-grid .blog-card:nth-child(n+2) {
+  #blog .blog-grid .blog-card:nth-child(n+3) {
     display: flex;
   }
 
@@ -76,20 +76,19 @@
     grid-template-columns: repeat(2, 1fr);
   }
 
+  /* Blog se muestra en 3 a partir de tablet/escritorio */
   #blog .blog-grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
   }
 }
 
 /* ===========================
-   DESKTOP (≥992px)
+   ESCRIPTORI 
    =========================== */
 @media (min-width: 992px) {
   #productos .productos-grid {
     grid-template-columns: repeat(4, 1fr);
   }
 
-  #blog .blog-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
+
 }

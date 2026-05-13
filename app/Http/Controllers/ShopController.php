@@ -20,11 +20,13 @@ class ShopController extends Controller
     public function cart()
     {
         $cart = session()->get('cart', []);
-        $total = 0;
+        $subtotal = 0;
         foreach ($cart as $item) {
-            $total += $item['price'] * $item['quantity'];
+            $subtotal += $item['price'] * $item['quantity'];
         }
-        return view('shop.cart', compact('cart', 'total'));
+        $iva = $subtotal * 0.21;
+        $total = $subtotal + $iva;
+        return view('shop.cart', compact('cart', 'subtotal', 'iva', 'total'));
     }
 
     public function addToCart(Request $request)
@@ -88,8 +90,10 @@ class ShopController extends Controller
             return redirect()->route('shop.index')->with('error', 'El carrito está vacío.');
         }
 
-        $total = collect($cart)->sum(fn($item) => $item['price'] * $item['quantity']);
-        return view('shop.checkout', compact('cart', 'total'));
+        $subtotal = collect($cart)->sum(fn($item) => $item['price'] * $item['quantity']);
+        $iva = $subtotal * 0.21;
+        $total = $subtotal + $iva;
+        return view('shop.checkout', compact('cart', 'subtotal', 'iva', 'total'));
     }
 
     public function processCheckout(Request $request)
@@ -107,7 +111,8 @@ class ShopController extends Controller
             return redirect()->route('shop.index')->with('error', 'El carrito está vacío.');
         }
 
-        $total = collect($cart)->sum(fn($item) => $item['price'] * $item['quantity']);
+        $subtotal = collect($cart)->sum(fn($item) => $item['price'] * $item['quantity']);
+        $total = $subtotal * 1.21;
 
         DB::beginTransaction();
 

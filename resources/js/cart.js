@@ -96,9 +96,20 @@ class Cart {
 
     totals(discountRate = 0) {
         const subtotal = this.list().reduce((acc, it) => acc + it.price * it.qty, 0);
-        const vat = subtotal * VAT_RATE;
         const discount = subtotal * Math.max(0, Math.min(1, discountRate));
-        return { subtotal, vat, discount, total: subtotal + vat - discount };
+        const baseImponible = subtotal - discount;
+        const vat = baseImponible * VAT_RATE;
+        const total = baseImponible + vat;
+
+        console.log("Cart Totals Calculation:", {
+            subtotal,
+            discount,
+            baseImponible,
+            vat,
+            total
+        });
+
+        return { subtotal, vat, discount, total };
     }
 }
 
