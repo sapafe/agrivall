@@ -177,7 +177,7 @@ h1, h2, h3, h4, .section-title {
 
 .cart-badge {
   background: #d94c4c;
-  color: white;
+  color: var(--bg-white);
   border-radius: 50%;
   padding: 2px 6px;
   font-size: 11px;
@@ -207,8 +207,8 @@ h1, h2, h3, h4, .section-title {
   position: absolute;
   right: 0;
   top: calc(100% + 8px);
-  background: white;
-  color: #333;
+  background: var(--bg-white);
+  color: var(--color-text);
   border-radius: 10px;
   box-shadow: 0 8px 18px rgba(0, 0, 0, 0.15);
   overflow: hidden;
@@ -220,23 +220,23 @@ h1, h2, h3, h4, .section-title {
   display: block;
   padding: 0.65rem 0.8rem;
   text-decoration: none;
-  color: #333;
+  color: var(--color-text);
   font-weight: 700;
 }
 
 .lang-menu a:hover {
-  background: #f2f2f2;
+  background: var(--bg-sage);
 }
 
 .lang:hover .lang-menu {
   display: block;
 }
 
-/* MOBILE NAV (Sidebar Drawer) */
+/* MOBILE NAV */
 .nav-mobile {
   position: fixed;
   top: 0;
-  left: -280px; /* Oculto a la izquierda */
+  left: -280px; /* Ocult a l'esquerra */
   width: 280px;
   height: 100vh;
   background-color: var(--bg-white);
@@ -317,7 +317,7 @@ h1, h2, h3, h4, .section-title {
 /* botons */
 .btn-primary {
   background-color: var(--color-primary);
-  color: white;
+  color: var(--bg-white);
   padding: 0.8rem 1.5rem;
   border: none;
   cursor: pointer;
@@ -334,7 +334,7 @@ h1, h2, h3, h4, .section-title {
 
 .btn-secondary {
   background-color: var(--color-primary);
-  color: white;
+  color: var(--bg-white);
   padding: 0.6rem 1.2rem;
   border: none;
   cursor: pointer;
@@ -375,7 +375,7 @@ h1, h2, h3, h4, .section-title {
 input, textarea {
   padding: 0.8rem;
   border-radius: 5px;
-  border: 1px solid #ccc;
+  border: 1px solid var(--color-border);
   font-size: 1rem;
   width: 100%;
 }
@@ -383,21 +383,21 @@ input, textarea {
 select {
   padding: 0.8rem;
   border-radius: 5px;
-  border: 1px solid #ccc;
+  border: 1px solid var(--color-border);
   font-size: 1rem;
   width: auto;
 }
 
 input:focus, textarea:focus {
   outline: none;
-  border-color: #2a7f2a;
+  border-color: var(--color-primary);
   box-shadow: 0 0 0 2px rgba(42, 127, 42, 0.1);
 }
 
 /* FOOTER */
 footer {
-  background-color: #2a7f2a;
-  color: white;
+  background-color: var(--bg-sage);
+  color: var(--color-text);
   padding: 4rem 0 2rem 0;
   text-align: center;
 }
@@ -449,12 +449,13 @@ footer ul {
 }
 
 footer ul li a {
-  color: white;
+  color: var(--color-text);
   text-decoration: none;
 }
 
 footer ul li a:hover {
   text-decoration: underline;
+  color: var(--color-primary);
 }
 
 /* HELPERS */

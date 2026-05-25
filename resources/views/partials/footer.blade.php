@@ -16,6 +16,7 @@
             <li><a href="#">Aviso Legal</a></li>
             <li><a href="#">Política de Privacidad</a></li>
             <li><a href="#">Política de Cancelación</a></li>
+            <li><a href="https://www.lavalldegallineraturisme.org" target="_blank">Turisme Rural</a></li>
         </ul>
     </div>
 </footer>
