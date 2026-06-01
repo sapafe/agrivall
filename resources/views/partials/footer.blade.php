@@ -17,6 +17,8 @@
             <li><a href="#">Política de Privacidad</a></li>
             <li><a href="#">Política de Cancelación</a></li>
             <li><a href="https://www.lavalldegallineraturisme.org" target="_blank">Turisme Rural</a></li>
+            <li><a href="https://agriculture.ec.europa.eu/farming/organic-farming/organics-glance_es" target="_blank">Agricultura Ecológica Europea</a></li>
+            <li><a href="https://www.instagram.com/lavalldegallineraturisme/" target="_blank"><i class="fa-brands fa-instagram"></i></a></li>
         </ul>
     </div>
 </footer>
