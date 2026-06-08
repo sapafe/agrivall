@@ -13,9 +13,9 @@
     <div class="container footer-container">
         <p>&copy; 2025 AgriVall. Todos los derechos reservados.</p>
         <ul>
-            <li><a href="#">Aviso Legal</a></li>
-            <li><a href="#">Política de Privacidad</a></li>
-            <li><a href="#">Política de Cancelación</a></li>
+            <li><a href="https://commission.europa.eu/legal-notice_es">Aviso Legal</a></li>
+            <li><a href="https://commission.europa.eu/privacy-policy-websites-managed-european-commission_es">Política de Privacidad</a></li>
+            <li><a href="https://lacajasaludable.es/policies/subscription-policy">Política de Cancelación</a></li>
             <li><a href="https://www.lavalldegallineraturisme.org" target="_blank">Turisme Rural</a></li>
             <li><a href="https://agriculture.ec.europa.eu/farming/organic-farming/organics-glance_es" target="_blank">Agricultura Ecológica Europea</a></li>
             <li><a href="https://www.instagram.com/lavalldegallineraturisme/" target="_blank"><i class="fa-brands fa-instagram"></i></a></li>
